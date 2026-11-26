@@ -48,7 +48,8 @@ main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-column
 }
 #dimLevel:has(input:disabled){opacity:.55}
 #dimValue{min-width:4ch;text-align:right;font-variant-numeric:tabular-nums}
-@media(min-width:761px){html{scrollbar-gutter:stable}}
+html,.photoMenu,.photoScroll,.slides,#slides,textarea {scrollbar-width:none;}
+:is(html,.photoMenu,.photoScroll,.slides,#slides,textarea)::-webkit-scrollbar {display:none;}
 #removeSlide{min-height:42px;color:#864535;font-size:13px;padding:6px 10px}
 #removeSlide:disabled{color:var(--muted)}
 dialog .deleteActions{margin:20px 0 0;justify-content:flex-end;gap:8px}

@@ -1,6 +1,6 @@
 const scope = self.registration.scope;
 const prefix = 'smms-offline:' + scope + ':';
-const cacheName = prefix + '0d0358f551b9ffa53f2f';
+const cacheName = prefix + 'b7452cf7a1dd9c874f0e';
 const assets = ['index.html', 'manifest.webmanifest', 'wide.webmanifest', 'icon-180.png', 'icon-192.png', 'icon-512.png'];
 const urls = assets.map(path => new URL(path, scope).href);
 
