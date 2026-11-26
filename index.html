@@ -14,7 +14,6 @@ main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-column
 #warning{position:sticky;bottom:0;padding:12px max(18px,calc((100vw - 900px)/2));background:#ffe8c8;color:#583512;font-size:14px}#warning button{text-decoration:underline;font-weight:600}dialog{border:1px solid var(--line);border-radius:16px;width:min(390px,92vw);padding:22px;background:#fdfcfe}dialog::backdrop{background:#18201966}dialog form{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}dialog h2{margin:0}dialog form button{font-size:24px;min-width:44px;height:44px}dialog>.fileButton{width:100%;margin:7px 0}#exportStatus{margin:12px 0 0}#exportStatus:empty{display:none}.sr{position:absolute;overflow:hidden;clip-path:inset(100%);width:1px;height:1px}[hidden]{display:none!important}
 @media(max-width:760px){header{height:calc(54px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 14px 0;gap:8px}.name{font-size:28px}.primary{padding:7px 14px;min-height:38px}main{display:flex;flex-direction:column;padding:0 0 env(safe-area-inset-bottom);gap:0}.studio,.inspector{width:100%;border-radius:0}.studio{padding:10px 14px 0}.seg button{min-height:36px;padding:6px 16px}#stage{height:clamp(230px,46svh,490px);padding:10px 0}.caption{min-height:32px}.guide{min-height:32px}.inspector{border:0;border-top:1px solid var(--line)}.panel{padding:16px}.tools button{min-height:45px}h1{font-size:21px;margin-bottom:14px}#layouts{grid-template-columns:repeat(3,1fr);gap:6px}.layout{flex-direction:column;gap:5px;justify-content:center;padding:6px 2px;font-size:11px}.row select{font-size:16px}.tools{position:sticky;top:0;background:#ffffff;z-index:1}}
 @media(max-width:760px){#layouts{grid-template-columns:1fr 1fr}.layout{flex-direction:row;justify-content:flex-start;padding:8px;min-height:52px;font-size:12px}}
-.effectsTitle{font-size:18px;margin:18px 0 8px}
 #contrastHelp{margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.45}
 
 .name { display:flex; align-items:center; gap:10px; }
@@ -49,14 +48,46 @@ main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-column
 }
 #dimLevel:has(input:disabled){opacity:.55}
 #dimValue{min-width:4ch;text-align:right;font-variant-numeric:tabular-nums}
-#photo #contrastHelp[hidden]{display:block!important;visibility:hidden}
 @media(min-width:761px){html{scrollbar-gutter:stable}}
 #removeSlide{min-height:42px;color:#864535;font-size:13px;padding:6px 10px}
 #removeSlide:disabled{color:var(--muted)}
 dialog .deleteActions{margin:20px 0 0;justify-content:flex-end;gap:8px}
 .deleteActions button{font-size:15px;padding-inline:16px;border-radius:10px;background:#eeedf1}
 .deleteActions button[value=remove]{background:#8d342a;color:white}
-</style><link rel="manifest" href="./manifest.webmanifest">
+.photoTools {display:grid;}
+.photoTools button {display:flex;align-items:center;justify-content:space-between;padding:12px 4px;min-height:48px;border-top:1px solid var(--line);font-size:15px;text-align:left;}
+.photoTools button::after {content:'';width:8px;height:8px;margin-right:5px;border:solid var(--muted);border-width:1.5px 1.5px 0 0;transform:rotate(45deg);}
+.photoTools button:disabled {opacity:.5;}
+html:has(#photoSheet[open]) {overflow:hidden;overscroll-behavior:none;}
+#photoSheet {inset:0;margin:auto;padding:0;width:min(1100px,96vw);height:min(820px,94vh);height:min(820px,94dvh);max-width:none;max-height:none;overflow:hidden;background:#e9e6ef;color:inherit;}
+#photoSheet[open] {display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);grid-template-rows:minmax(0,1fr);}
+#photoPreview {min-width:0;min-height:0;padding:16px;}
+#photoPreview #stage {height:100%;padding:0;grid-template:minmax(0,1fr) / minmax(0,1fr);}
+.photoDrawer {display:flex;flex-direction:column;min-height:0;background:white;padding:8px 20px 0;}
+.photoDrawer form {flex:none;gap:8px;margin:0;min-height:52px;}
+.photoDrawer h2 {font-size:21px;}
+.photoDrawer form button {font-size:15px;font-weight:650;color:var(--accent);padding:0 4px;}
+.photoScroll {overflow-y:auto;overscroll-behavior:contain;min-height:0;padding:0 2px 16px;}
+.photoScroll input[type=range] {min-height:30px;}
+.photoScroll .fileButton:focus-within {outline:2px solid var(--accent);outline-offset:2px;}
+#photoError {font-size:14px;color:#843528;}
+@media(max-width:760px) and (orientation:portrait) {
+  #photoSheet {width:100%;height:100%;height:100dvh;border:0;border-radius:0;}
+  #photoSheet[open] {grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;}
+  #photoPreview {padding:max(10px,env(safe-area-inset-top)) 12px 12px;}
+  .photoDrawer {border-radius:22px 22px 0 0;padding:4px 16px env(safe-area-inset-bottom);max-height:46vh;max-height:46dvh;}
+  .photoDrawer:has([data-photo-pane=adjust]:not([hidden])) {height:46vh;height:46dvh;}
+  .photoScroll {padding-bottom:12px;}
+  @media(prefers-reduced-motion:no-preference) {
+    #photoSheet[open] .photoDrawer {animation:photoDrawerIn .18s ease-out;}
+    @keyframes photoDrawerIn {from {transform:translateY(24px);}}
+  }
+}
+#rotationNotice {position:fixed;inset:0;margin:0;width:100%;height:100%;max-width:none;max-height:none;border:0;border-radius:0;text-align:center;}
+#rotationNotice[open] {display:grid;place-items:center;}
+#rotationNotice::backdrop {background:#fdfcfe;}
+html:has(#rotationNotice[open]) {overflow:hidden;}
+</style><link rel="manifest" data-app-manifest>
 <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png">
 <link rel="icon" href="./icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -90,13 +121,31 @@ dialog .deleteActions{margin:20px 0 0;justify-content:flex-end;gap:8px}
     <div id="logos" aria-label="Логотип серии"></div>
     <label class="row">Цвет текста и логотипа<select data-slide="ink"></select></label>
   </div>
-  <div id="photo" class="panel" hidden><h1>Фотография</h1><label class="fileButton">Выбрать фото<input type="file" accept="image/*" id="upload"></label>
+  <div id="photo" class="panel" hidden><h1>Фотография</h1>
+    <div class="photoTools">
+      <button data-photo-tool="source" aria-haspopup="dialog">Выбрать фото</button>
+      <button data-photo-tool="crop" aria-haspopup="dialog">Настройки фото</button>
+      <button data-photo-tool="adjust" aria-haspopup="dialog">Эффекты</button>
+    </div>
+  </div>
+</section></main>
+<dialog id="photoSheet" aria-labelledby="photoTitle">
+  <div id="photoPreview"></div>
+  <section class="photoDrawer">
+    <form method="dialog"><h2 id="photoTitle"></h2><button autofocus>Готово</button></form>
+    <div class="photoScroll">
+    <div data-photo-pane="source" hidden>
+    <label class="fileButton">Открыть фототеку<input type="file" accept="image/*" id="upload"></label>
     <label class="row">Показывать фото<input type="checkbox" data-slide="photoOn" role="switch"></label>
-    <fieldset id="effects"><legend class="sr">Кадрирование и эффекты</legend>
+    <p id="photoError" role="alert" hidden></p>
+    </div>
+    <fieldset id="crop" data-photo-pane="crop" hidden><legend class="sr">Кадрирование</legend>
     <label class="slider">Масштаб<input type="range" min="1" max="3" step=".02" data-slide="zoom"></label>
     <label class="slider">По горизонтали<input type="range" min="0" max="1" step=".01" data-slide="x"></label>
     <label class="slider">По вертикали<input type="range" min="0" max="1" step=".01" data-slide="y"></label>
-    <h2 class="effectsTitle">Эффекты</h2>
+    </fieldset>
+    <div data-photo-pane="adjust" hidden>
+    <fieldset id="effects"><legend class="sr">Эффекты фотографии</legend>
     <label class="slider">Размытие<input type="range" min="0" max="20" data-slide="blur"></label>
     <label class="slider">Контраст<input type="range" min="50" max="150" data-slide="contrast"></label>
     <label class="row">Затемнить фото<input id="dimPhoto" type="checkbox" role="switch"></label>
@@ -104,12 +153,15 @@ dialog .deleteActions{margin:20px 0 0;justify-content:flex-end;gap:8px}
     </fieldset>
     <label class="row">Мягкая тень<input type="checkbox" data-slide="softShadow" role="switch"></label>
     <p id="contrastHelp" hidden>Под текстом или логотипом есть участки с контрастом ниже 4,5:1. Попробуйте изменить кадрирование или затемнить фото и выбрать светлый текст.</p>
-  </div>
-</section></main>
+    </div>
+    </div>
+  </section>
+</dialog>
 <div id="warning" role="alert" hidden><span id="warningText"></span> <button id="smaller" hidden>Переключить на H2</button></div>
 <dialog id="deleteSheet" aria-labelledby="deleteTitle"><h2 id="deleteTitle"></h2><form method="dialog" class="deleteActions"><button value="cancel" autofocus>Отмена</button><button value="remove">Удалить</button></form></dialog>
 <dialog id="exportSheet"><form method="dialog"><h2>Экспорт</h2><button aria-label="Закрыть">×</button></form>
 <button id="png" class="fileButton">Сохранить кадр PNG</button><button id="zip" class="fileButton">Сохранить карусель ZIP</button><p id="exportStatus" role="status"></p></dialog>
+<dialog id="rotationNotice" closedby="none" aria-labelledby="rotationTitle"><h2 id="rotationTitle"></h2></dialog>
 <script type="text/plain" id="font-licenses">Inter
 Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)
 
@@ -992,6 +1044,7 @@ const SMFiles = (() => {
   const $ = id => document.getElementById(id);
   const all = selector => [...document.querySelectorAll(selector)];
   const frame = $('frame'), stage = $('stage');
+  const photoSheet=$('photoSheet'), stageHome=stage.parentNode, stageAfter=stage.nextElementSibling;
   const format = Object.fromEntries(ST_FORMATS.map(([mode,,width,height])=>[mode,[width,height]]));
   format.carousel = format.post;
   const positions = {top:'Сверху',middle:'Посередине',bottom:'Снизу'};
@@ -1081,7 +1134,9 @@ const SMFiles = (() => {
     $('removeSlide').disabled=p.slides.length<=1;
     $('logoPosition').hidden=s.position!=='top'||!s.logoOn;
     $('bodyField').hidden=!s.bodyOn;$('footerField').hidden=!s.footer;
-    $('effects').disabled=!s.photo||!s.photoOn;
+    $('crop').disabled=$('effects').disabled=!s.photo||!s.photoOn;
+    document.querySelector('[data-photo-tool=crop]').disabled=$('crop').disabled;
+    document.querySelector('[data-slide=photoOn]').disabled=!s.photo;
     const dimOn=s.dimOn ?? (s.darken>0);
     $('dimPhoto').checked=dimOn;
     const strength=$('dimLevel').querySelector('input');
@@ -1116,6 +1171,27 @@ const SMFiles = (() => {
   });
   for(const b of modeButtons)b.onclick=()=>{state.mode=b.dataset.mode;changed();renderSlideBar();};
   for(const b of tabButtons)b.onclick=()=>{tab=b.dataset.tab;sync();};
+  for(const trigger of all('[data-photo-tool]'))trigger.onclick=()=>{
+    for(const pane of all('[data-photo-pane]'))pane.hidden=pane.dataset.photoPane!==trigger.dataset.photoTool;
+    $('photoTitle').textContent=trigger.textContent;
+    $('photoError').hidden=true;
+    stageHome.style.minHeight=stageHome.offsetHeight+'px';
+    $('photoPreview').append(stage);
+    frame.setAttribute('role','img');
+    frame.setAttribute('aria-label','Предпросмотр кадра');
+    frame.tabIndex=-1;
+    photoSheet.showModal();
+    photoSheet.querySelector('.photoScroll').scrollTop=0;
+    resize();
+  };
+  photoSheet.addEventListener('close',()=>{
+    stageHome.insertBefore(stage,stageAfter);
+    stageHome.style.minHeight='';
+    frame.setAttribute('role','button');
+    frame.setAttribute('aria-label','Редактировать текст в кадре');
+    frame.tabIndex=0;
+    resize();
+  });
   $('addSlide').onclick=()=>{const p=project();p.slides.push(newSlide(false));p.index=p.slides.length-1;changed();renderSlideBar();$('slides').lastChild.scrollIntoView({block:'nearest',inline:'nearest'});};
   $('removeSlide').onclick=()=>{
     const p=project();
@@ -1144,6 +1220,7 @@ const SMFiles = (() => {
   };
   $('upload').onchange=async e=>{
     const file=e.target.files[0],s=slide();e.target.value='';if(!file)return;
+    $('photoError').hidden=true;
     try {
       const url=URL.createObjectURL(file);
       try {
@@ -1154,7 +1231,11 @@ const SMFiles = (() => {
         const photo=c.toDataURL(file.type==='image/png'?'image/png':'image/jpeg',.94);
         Object.assign(s,{photo,photoWidth:c.width,photoHeight:c.height,photoOn:true,x:.5,y:.5,zoom:1});changed();
       } finally {URL.revokeObjectURL(url);}
-    } catch {showError('Фото не открылось. Выберите изображение в формате JPEG или PNG.');}
+    } catch {
+      const message='Фото не открылось. Выберите изображение в формате JPEG или PNG.';
+      if(photoSheet.open){$('photoError').textContent=message;$('photoError').hidden=false;}
+      else showError(message);
+    }
   };
   let drag=null;
   frame.onpointerdown=e=>{
@@ -1174,6 +1255,7 @@ const SMFiles = (() => {
   };
   frame.onlostpointercapture=()=>{drag=null;};
   function editPreview(){
+    if(photoSheet.open)return;
     if(tab==='photo' && slide().photoOn && slide().photo)return;
     tab='text';sync();document.querySelector('[data-slide=title]').focus();
   }
@@ -1222,6 +1304,48 @@ const SMFiles = (() => {
     document.querySelector('main').inert=false;$('export').disabled=false;
   }
   start();
+})();
+
+(() => {
+  const notice=document.getElementById('rotationNotice');
+  const orientation=screen.orientation;
+  const userAgent=navigator.userAgent;
+  const tablet=/iPad|Tablet/i.test(userAgent) ||
+    (/Macintosh/i.test(userAgent) && navigator.maxTouchPoints>1) ||
+    (/Android/i.test(userAgent) && !/Mobile/i.test(userAgent));
+  const manifest=document.querySelector('link[data-app-manifest]');
+  let preferred;
+  function applyOrientation(){
+    const touch=navigator.maxTouchPoints>0;
+    const phone=!tablet && (navigator.userAgentData?.mobile || /iPhone|iPod|Android.*Mobile/i.test(userAgent) ||
+      (touch && Math.min(screen.width,screen.height)<600));
+    const target=phone?'portrait-primary':'landscape-primary';
+    if(target!==preferred){
+      preferred=target;
+      if(manifest)manifest.href=phone?'./manifest.webmanifest':'./wide.webmanifest';
+      if(touch && (matchMedia('(display-mode: standalone)').matches || navigator.standalone))
+        orientation?.lock?.(preferred).catch(()=>{ /* The notice covers browsers without an orientation lock. */ });
+    }
+    // The physical screen stays in portrait when the software keyboard opens.
+    const portrait=orientation?.type ? orientation.type.startsWith('portrait') :
+      typeof window.orientation==='number' ? Math.abs(window.orientation)%180===0 : screen.height>screen.width;
+    if(portrait===phone){
+      if(notice.open)notice.close();
+    } else if(!notice.open){
+      document.getElementById('rotationTitle').textContent=phone?'Держите телефон вертикально':
+        tablet || touch?'Поверните устройство горизонтально':'Откройте редактор на горизонтальном экране';
+      notice.showModal();
+    }
+  }
+  notice.addEventListener('cancel',event=>event.preventDefault());
+  notice.addEventListener('keydown',event=>{
+    if(event.key==='Escape')event.preventDefault();
+  });
+  orientation?.addEventListener('change',applyOrientation);
+  window.addEventListener('orientationchange',applyOrientation);
+  window.addEventListener('resize',applyOrientation);
+  window.addEventListener('pageshow',applyOrientation);
+  applyOrientation();
 })();
 </script><script>(() => {
   const status = document.getElementById('offlineStatus');
