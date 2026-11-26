@@ -1173,7 +1173,7 @@ const SMFiles = (() => {
     const b=button(title,()=>{project().theme=id;changed();});b.dataset.theme=id;b.className='swatch';
     const swatch=document.createElement('i');swatch.style.background=SMRender.themes[id];swatch.style.color=['ink','plum'].includes(id)?'white':'black';swatch.textContent='Аа';swatch.setAttribute('aria-hidden','true');b.prepend(swatch);$('themes').append(b);
   }
-  for(const [id,name] of Object.entries({'01':'Ингредиенты','02':'Знак','03':'Обжарка','04':'без текста'})){
+  for(const [id,name] of Object.entries({'01':'Ингредиенты','02':'Знак','03':'Обжарка','04':'Без текста'})){
     const b=button(name,()=>{project().logo=id;changed();});
     b.dataset.logo=id;
     $('logos').append(b);
