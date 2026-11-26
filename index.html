@@ -58,26 +58,38 @@ dialog .deleteActions{margin:20px 0 0;justify-content:flex-end;gap:8px}
 .photoTools button {display:flex;align-items:center;justify-content:space-between;padding:12px 4px;min-height:48px;border-top:1px solid var(--line);font-size:15px;text-align:left;}
 .photoTools button::after {content:'';width:8px;height:8px;margin-right:5px;border:solid var(--muted);border-width:1.5px 1.5px 0 0;transform:rotate(45deg);}
 .photoTools button:disabled {opacity:.5;}
-html:has(#photoSheet[open]) {overflow:hidden;overscroll-behavior:none;}
-#photoSheet {inset:0;margin:auto;padding:0;width:min(1100px,96vw);height:min(820px,94vh);height:min(820px,94dvh);max-width:none;max-height:none;overflow:hidden;background:#e9e6ef;color:inherit;}
-#photoSheet[open] {display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);grid-template-rows:minmax(0,1fr);}
-#photoPreview {min-width:0;min-height:0;padding:16px;}
-#photoPreview #stage {height:100%;padding:0;grid-template:minmax(0,1fr) / minmax(0,1fr);}
-.photoDrawer {display:flex;flex-direction:column;min-height:0;background:white;padding:8px 20px 0;}
+#photo {padding:0;height:clamp(220px,calc(100svh - 180px),440px);min-height:0;}
+.photoMenu {height:100%;overflow:auto;padding:22px;}
+#photo:has(#photoSheet[open]) .photoMenu {display:none;}
+#photoSheet {position:static;width:100%;height:100%;margin:0;padding:0;border:0;border-radius:0;background:white;color:inherit;}
+.photoDrawer {height:100%;display:flex;flex-direction:column;min-height:0;background:white;padding:8px 20px 0;}
 .photoDrawer form {flex:none;gap:8px;margin:0;min-height:52px;}
 .photoDrawer h2 {font-size:21px;}
 .photoDrawer form button {font-size:15px;font-weight:650;color:var(--accent);padding:0 4px;}
+.photoDrawer form button:focus {outline:none;}
+.photoDrawer form button:focus-visible {text-decoration:underline;text-underline-offset:4px;}
 .photoScroll {overflow-y:auto;overscroll-behavior:contain;min-height:0;padding:0 2px 16px;}
 .photoScroll input[type=range] {min-height:30px;}
 .photoScroll .fileButton:focus-within {outline:2px solid var(--accent);outline-offset:2px;}
 #photoError {font-size:14px;color:#843528;}
 @media(max-width:760px) and (orientation:portrait) {
-  #photoSheet {width:100%;height:100%;height:100dvh;border:0;border-radius:0;}
-  #photoSheet[open] {grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;}
-  #photoPreview {padding:max(10px,env(safe-area-inset-top)) 12px 12px;}
-  .photoDrawer {border-radius:22px 22px 0 0;padding:4px 16px env(safe-area-inset-bottom);max-height:46vh;max-height:46dvh;}
-  .photoDrawer:has([data-photo-pane=adjust]:not([hidden])) {height:46vh;height:46dvh;}
+  body:has(#photo:not([hidden])) {height:100dvh;display:flex;flex-direction:column;overflow:hidden;}
+  body:has(#photo:not([hidden])) > header {flex:none;}
+  main:has(#photo:not([hidden])) {width:100%;flex:1;min-height:0;margin:0;}
+  main:has(#photo:not([hidden])) .studio {flex:none;}
+  main:has(#photo:not([hidden])) #stage {height:clamp(160px,min(46svh,calc(100svh - 365px)),490px);}
+  .inspector:has(#photo:not([hidden])) {display:flex;flex-direction:column;flex:1;min-height:0;}
+  .inspector:has(#photo:not([hidden])) .tools {flex:none;}
+  main:has(#photoSheet[open]) :is(.caption,.slides,.tools) {display:none;}
+  main:has(#photoSheet[open]) .inspector {border-radius:18px 18px 0 0;}
+  #photo {flex:1;height:auto;}
+  .photoMenu {padding:12px 16px;}
+  .photoDrawer {padding:0 16px;}
   .photoScroll {padding-bottom:12px;}
+  @media(max-height:680px) {
+    main:has(#photo:not([hidden])) .slides {flex-wrap:nowrap;overflow-x:auto;}
+    main:has(#photo:not([hidden])) .slides > * {flex:none;}
+  }
   @media(prefers-reduced-motion:no-preference) {
     #photoSheet[open] .photoDrawer {animation:photoDrawerIn .18s ease-out;}
     @keyframes photoDrawerIn {from {transform:translateY(24px);}}
@@ -121,16 +133,14 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
     <div id="logos" aria-label="Логотип серии"></div>
     <label class="row">Цвет текста и логотипа<select data-slide="ink"></select></label>
   </div>
-  <div id="photo" class="panel" hidden><h1>Фотография</h1>
+  <div id="photo" class="panel" hidden><div class="photoMenu"><h1>Фотография</h1>
     <div class="photoTools">
       <button data-photo-tool="source" aria-haspopup="dialog">Выбрать фото</button>
       <button data-photo-tool="crop" aria-haspopup="dialog">Настройки фото</button>
       <button data-photo-tool="adjust" aria-haspopup="dialog">Эффекты</button>
     </div>
   </div>
-</section></main>
 <dialog id="photoSheet" aria-labelledby="photoTitle">
-  <div id="photoPreview"></div>
   <section class="photoDrawer">
     <form method="dialog"><h2 id="photoTitle"></h2><button autofocus>Готово</button></form>
     <div class="photoScroll">
@@ -157,6 +167,8 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
     </div>
   </section>
 </dialog>
+  </div>
+</section></main>
 <div id="warning" role="alert" hidden><span id="warningText"></span> <button id="smaller" hidden>Переключить на H2</button></div>
 <dialog id="deleteSheet" aria-labelledby="deleteTitle"><h2 id="deleteTitle"></h2><form method="dialog" class="deleteActions"><button value="cancel" autofocus>Отмена</button><button value="remove">Удалить</button></form></dialog>
 <dialog id="exportSheet"><form method="dialog"><h2>Экспорт</h2><button aria-label="Закрыть">×</button></form>
@@ -1044,7 +1056,8 @@ const SMFiles = (() => {
   const $ = id => document.getElementById(id);
   const all = selector => [...document.querySelectorAll(selector)];
   const frame = $('frame'), stage = $('stage');
-  const photoSheet=$('photoSheet'), stageHome=stage.parentNode, stageAfter=stage.nextElementSibling;
+  const photoSheet=$('photoSheet');
+  let photoTrigger;
   const format = Object.fromEntries(ST_FORMATS.map(([mode,,width,height])=>[mode,[width,height]]));
   format.carousel = format.post;
   const positions = {top:'Сверху',middle:'Посередине',bottom:'Снизу'};
@@ -1169,28 +1182,25 @@ const SMFiles = (() => {
     const value=el.type==='checkbox'?el.checked:el.type==='range'?Number(el.value):el.hasAttribute('data-bool')?el.value==='true':el.value;
     (el.dataset.slide?slide():project())[el.dataset.slide||el.dataset.project]=value;changed();
   });
-  for(const b of modeButtons)b.onclick=()=>{state.mode=b.dataset.mode;changed();renderSlideBar();};
-  for(const b of tabButtons)b.onclick=()=>{tab=b.dataset.tab;sync();};
+  for(const b of modeButtons)b.onclick=()=>{photoSheet.close();state.mode=b.dataset.mode;changed();renderSlideBar();};
+  for(const b of tabButtons)b.onclick=()=>{photoSheet.close();tab=b.dataset.tab;sync();};
   for(const trigger of all('[data-photo-tool]'))trigger.onclick=()=>{
     for(const pane of all('[data-photo-pane]'))pane.hidden=pane.dataset.photoPane!==trigger.dataset.photoTool;
     $('photoTitle').textContent=trigger.textContent;
     $('photoError').hidden=true;
-    stageHome.style.minHeight=stageHome.offsetHeight+'px';
-    $('photoPreview').append(stage);
-    frame.setAttribute('role','img');
-    frame.setAttribute('aria-label','Предпросмотр кадра');
-    frame.tabIndex=-1;
-    photoSheet.showModal();
+    photoTrigger=trigger;
+    photoSheet.show();
     photoSheet.querySelector('.photoScroll').scrollTop=0;
-    resize();
   };
-  photoSheet.addEventListener('close',()=>{
-    stageHome.insertBefore(stage,stageAfter);
-    stageHome.style.minHeight='';
-    frame.setAttribute('role','button');
-    frame.setAttribute('aria-label','Редактировать текст в кадре');
-    frame.tabIndex=0;
-    resize();
+  function finishPhoto(){
+    photoSheet.close();
+    photoTrigger.focus({preventScroll:true});
+  }
+  photoSheet.querySelector('form').onsubmit=e=>{e.preventDefault();finishPhoto();};
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape' && photoSheet.open && !document.querySelector('dialog:modal')){
+      e.preventDefault();finishPhoto();
+    }
   });
   $('addSlide').onclick=()=>{const p=project();p.slides.push(newSlide(false));p.index=p.slides.length-1;changed();renderSlideBar();$('slides').lastChild.scrollIntoView({block:'nearest',inline:'nearest'});};
   $('removeSlide').onclick=()=>{
