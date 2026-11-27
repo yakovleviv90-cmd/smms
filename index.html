@@ -18,7 +18,7 @@ main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-column
 #stage{display:grid;place-items:center;margin-block:12px;height:clamp(429px,calc(100svh - 180px),904px);padding:14px 0;overflow:hidden}#frame{display:block;background:var(--ink);max-width:100%;max-height:100%}#frame.pan{touch-action:none;cursor:grab}.slides,#slides{display:flex;align-items:center;gap:8px}.slides{border-top:1px solid var(--line);padding:8px 0;flex-wrap:wrap}#slides{max-width:100%;overflow-x:auto}#slides button,#addSlide{min-height:40px;min-width:40px;border-radius:7px;background:var(--panel);white-space:nowrap}#slides button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}#addSlide{padding:4px 12px}
 .inspector{background:var(--panel);border:1px solid var(--line);border-radius:20px;min-width:0;overflow:hidden}.tools{border-bottom:1px solid var(--line);padding:0 10px}.tools button{position:relative;flex:1;min-height:50px;color:var(--muted);font-size:14px}.tools button[aria-selected=true]{color:var(--accent);font-weight:690}.tools button[aria-selected=true]:after{content:'';position:absolute;bottom:0;height:3px;left:12px;right:12px;background:var(--accent);border-radius:3px}.panel{padding:22px}h1,h2{margin:0 0 20px;font-size:25px;line-height:1.15;letter-spacing:-.035em}#layouts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}.layout{display:flex;align-items:center;gap:9px;padding:8px;border:1px solid var(--line);border-radius:9px;text-align:left;font-size:13px;font-weight:550}.layout[aria-pressed=true],.swatch[aria-pressed=true],#logos button[aria-pressed=true]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--container)}
 .row,.slider{padding:10px 0;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:50px;font-size:14px}select{max-width:58%;background:var(--container);padding:7px 5px;border:0;border-radius:6px}input[role=switch]{appearance:none;width:43px;height:26px;flex:none;border-radius:20px;margin:0;background:var(--container);box-shadow:inset 0 0 0 1px var(--outline);position:relative;cursor:pointer}input[role=switch]:checked{background:var(--accent);box-shadow:none}input[role=switch]:before{content:'';position:absolute;background:var(--panel);border-radius:50%;width:20px;height:20px;top:3px;left:3px}input[role=switch]:checked:before{left:20px}
-.field{display:block;font-size:13px;font-weight:600;margin-bottom:12px}.field input,.field textarea{width:100%;display:block;border:1px solid var(--outline);background:var(--panel);border-radius:8px;padding:10px;margin-top:7px;font-size:16px;font-weight:400;resize:vertical}.fileButton{display:block;text-align:center;margin:8px 0 16px;position:relative}.fileButton input{width:100%;height:100%;position:absolute;inset:0;opacity:0;cursor:pointer}fieldset{border:0;padding:0;margin:0}.slider input{width:52%;accent-color:var(--accent)}fieldset:disabled{opacity:.5}#themes,#logos{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 18px}.swatch,#logos button{border:1px solid var(--line);border-radius:7px;min-height:44px;padding:6px 8px;font-size:12px}.swatch i{display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid #0002;vertical-align:middle;margin-right:4px}#logos button{flex:1;min-width:54px}
+.field{display:block;font-size:13px;font-weight:600;margin-bottom:12px}.field input,.field textarea,.textEntry{width:100%;display:block;border:1px solid var(--outline);background:var(--panel);border-radius:8px;padding:10px;margin-top:7px;font-size:16px;font-weight:400;resize:vertical}.fileButton{display:block;text-align:center;margin:8px 0 16px;position:relative}.fileButton input{width:100%;height:100%;position:absolute;inset:0;opacity:0;cursor:pointer}fieldset{border:0;padding:0;margin:0}.slider input{width:52%;accent-color:var(--accent)}fieldset:disabled{opacity:.5}#themes,#logos{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 18px}.swatch,#logos button{border:1px solid var(--line);border-radius:7px;min-height:44px;padding:6px 8px;font-size:12px}.swatch i{display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid #0002;vertical-align:middle;margin-right:4px}#logos button{flex:1;min-width:54px}
 #warning{position:sticky;bottom:0;padding:12px max(18px,calc((100vw - 900px)/2));background:#ffe8c8;color:#583512;font-size:14px}#warning button{text-decoration:underline;font-weight:600}dialog{border:1px solid var(--line);border-radius:16px;width:min(390px,92vw);padding:22px;background:var(--panel)}dialog::backdrop{background:#20211f66}dialog form{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}dialog h2{margin:0}dialog form button{font-size:24px;min-width:44px;height:44px}dialog>.fileButton{width:100%;margin:7px 0}#exportStatus{margin:12px 0 0}#exportStatus:empty{display:none}.sr{position:absolute;overflow:hidden;clip-path:inset(100%);width:1px;height:1px}[hidden]{display:none!important}
 @media(max-width:760px){header{height:calc(54px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 14px 0;gap:8px}.primary{padding:7px 14px;min-height:38px}main{display:flex;flex-direction:column;padding:0 0 env(safe-area-inset-bottom);gap:0}.studio,.inspector{width:100%;border-radius:0}.studio{padding:0 14px}#stage{margin-block:5px;height:clamp(305px,calc(46svh + 75px),565px);padding:10px 0}.inspector{border:0;border-top:1px solid var(--line)}.panel{padding:16px}.tools button{min-height:45px}h1{font-size:21px;margin-bottom:14px}#layouts{grid-template-columns:repeat(3,1fr);gap:6px}.layout{flex-direction:column;gap:5px;justify-content:center;padding:6px 2px;font-size:11px}.row select{font-size:16px}.tools{position:sticky;top:0;background:var(--panel);z-index:1}}
 @media(max-width:760px){#layouts{grid-template-columns:1fr 1fr}.layout{flex-direction:row;justify-content:flex-start;padding:8px;min-height:52px;font-size:12px}}
@@ -149,7 +149,11 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
 .row,.slider,.photoTools button {min-height:var(--control-height);padding:4px 0;gap:8px;font-size:14px;}
 .row select {border-radius:var(--control-radius);padding:4px;min-height:32px;}
 .field {margin-bottom:6px;}
-.field input,.field textarea {padding:6px 8px;margin-top:3px;border-radius:var(--control-radius);}
+.field input,.field textarea,.textEntry {padding:6px 8px;margin-top:3px;border-radius:var(--control-radius);}
+.textField {display:grid;gap:4px;}
+.textField + .textField {margin-top:12px;}
+.textFieldLabel {display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:28px;font-size:14px;font-weight:600;line-height:20px;cursor:pointer;}
+.textEntry {margin-top:0;line-height:1.35;}
 input[role=switch] {width:36px;height:22px;border:1px solid var(--line);box-shadow:none;}
 input[role=switch]:checked {border-color:transparent;}
 input[role=switch]:before {width:16px;height:16px;top:2px;left:2px;}
@@ -222,11 +226,18 @@ button:not(.layout) > .buttonLabel {position:relative;top:-1px;}
     <label class="row" id="swapRow">Поменять местами текст и логотип<input type="checkbox" data-slide="swapBlocks" role="switch"></label>
   </div>
   <div id="text" class="panel" hidden><h1>Текст слайда</h1>
-    <label class="field">Заголовок<textarea data-slide="title" rows="2"></textarea></label>
-    <label class="row">Текст под заголовком<input type="checkbox" data-slide="bodyOn" role="switch"></label>
-    <label class="field" id="bodyField"><span class="sr">Текст под заголовком</span><textarea data-slide="body" rows="2"></textarea></label>
-    <label class="row">Добавить аннотацию<input type="checkbox" data-slide="footer" role="switch"></label>
-    <label class="field" id="footerField">Аннотация серии<input type="text" data-project="footerText" placeholder="Текст у края кадра"></label>
+    <div class="textField">
+      <label class="textFieldLabel" for="titleField">Заголовок</label>
+      <textarea class="textEntry" id="titleField" data-slide="title" rows="2"></textarea>
+    </div>
+    <div class="textField">
+      <label class="textFieldLabel"><span id="bodyLabel">Текст под заголовком</span><input type="checkbox" data-slide="bodyOn" role="switch" aria-controls="bodyField"></label>
+      <textarea class="textEntry" id="bodyField" aria-labelledby="bodyLabel" data-slide="body" rows="2"></textarea>
+    </div>
+    <div class="textField">
+      <label class="textFieldLabel"><span id="footerLabel">Аннотация</span><input type="checkbox" data-slide="footer" role="switch" aria-controls="footerField"></label>
+      <input class="textEntry" id="footerField" aria-labelledby="footerLabel" type="text" data-project="footerText" hidden>
+    </div>
   </div>
   <div id="style" class="panel" hidden><h1>Оформление</h1><label class="field">Тема</label><div id="themes"></div>
     <label class="row">Шрифт заголовка<select data-project="font"><option>Inter</option><option>Manrope</option><option>Lora</option><option>Unbounded</option><option>Russo One</option></select></label>
