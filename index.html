@@ -184,7 +184,11 @@ input[role=switch]:checked:before {left:16px;}
 
 .previewFrame {position:relative;isolation:isolate;max-width:100%;}
 :where(html,body,body *) {touch-action:pan-x pan-y;}
-#size {position:absolute;top:10px;right:10px;pointer-events:none;user-select:none;white-space:nowrap;font-size:10px;line-height:1;font-variant-numeric:tabular-nums;color:white;mix-blend-mode:difference;opacity:.25;}
+#guideOverlay {display:none;position:absolute;inset:0;pointer-events:none;user-select:none;color:white;mix-blend-mode:difference;opacity:.25;}
+main:has(#guides:checked) #guideOverlay {display:block;}
+#safeArea {position:absolute;border:1px dashed currentColor;}
+#safeArea.overflow {border-width:2px;}
+#size {position:absolute;top:10px;right:10px;pointer-events:none;user-select:none;white-space:nowrap;font-size:10px;line-height:1;font-variant-numeric:tabular-nums;}
 #saveState {flex:1 1 0;text-align:right;}
 button:not(.layout) > .buttonLabel {position:relative;top:-1px;}
 </style><link rel="manifest" data-app-manifest>
@@ -202,7 +206,7 @@ button:not(.layout) > .buttonLabel {position:relative;top:-1px;}
 <div class="headerActions"><button id="clearEditor" disabled><span class="buttonLabel">Очистить</span></button><button id="export" class="primary" aria-label="Экспорт" title="Экспорт"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 15V3m-5 5 5-5 5 5M4 15v5h16v-5"/></svg></button></div></header>
 <main>
 <section class="studio" aria-label="Предпросмотр">
-  <div id="stage"><div class="previewFrame"><canvas id="frame" width="1080" height="1920" role="button" tabindex="0" aria-label="Редактировать текст в кадре"></canvas><small id="size"></small></div></div>
+  <div id="stage"><div class="previewFrame"><canvas id="frame" width="1080" height="1920" role="button" tabindex="0" aria-label="Редактировать текст в кадре"></canvas><div id="guideOverlay"><i id="safeArea" aria-hidden="true"></i><small id="size"></small></div></div></div>
   <div id="slideTray" inert><div class="slideClip">
     <div class="slides" id="slideBar"><div id="slides"></div><button id="addSlide"><span class="buttonLabel">+ Добавить слайд</span></button><button id="removeSlide"><span class="buttonLabel">Удалить слайд</span></button></div>
   </div></div>
@@ -1045,7 +1049,7 @@ window.SMRender = (() => {
     }
     return {white, ratio: white ? light : dark};
   }
-  async function render(canvas, project, slide, {guides = false} = {}) {
+  async function render(canvas, project, slide) {
     const token = {}; ongoing.set(canvas, token);
     const p = {...project}, s = {...slide};
     const height = p.mode === 'story' ? 1920 : 1350;
@@ -1079,15 +1083,8 @@ window.SMRender = (() => {
       zone.draw(g);
       g.restore();
     }
-    if (guides) {
-      g.save();
-      g.setLineDash([14, 10]);
-      g.strokeStyle = frame.overflow ? '#ee3838' : '#878787';
-      g.lineWidth = frame.overflow ? 6 : 2;
-      g.strokeRect(SIDE, frame.top, LINE_WIDTH, frame.bottom - frame.top);
-      g.restore();
-    }
-    return {overflow: frame.overflow, h2Fits, lowContrast};
+    const safeInset = `${100 * frame.top / height}% ${100 * SIDE / W}% ${100 * (height - frame.bottom) / height}%`;
+    return {overflow: frame.overflow, h2Fits, lowContrast, safeInset};
   }
   return {render,themes,logoChoice};
 })();
@@ -1263,11 +1260,13 @@ const SMFiles = (() => {
     try {
       for (;;) {
         const token=version,p=project(),s=slide();
-        const result=await SMRender.render(buffer,{...p},{...s},{guides:$('guides').checked});
+        const result=await SMRender.render(buffer,{...p},{...s});
         if(token!==version)continue;
         if(frame.width!==buffer.width || frame.height!==buffer.height){frame.width=buffer.width;frame.height=buffer.height;}
         frame.getContext('2d',{willReadFrequently:true}).drawImage(buffer,0,0);
         frame.classList.toggle('outlined', ['paper','iris','clay'].includes(p.theme));
+        $('safeArea').style.inset=result.safeInset;
+        $('safeArea').classList.toggle('overflow',result.overflow);
         $('warning').hidden=!result.overflow; $('smaller').hidden=!result.h2Fits;
         $('warningText').textContent=result.overflow?'Текст выходит за безопасные поля. Сократите его.':'';
         $('contrastHelp').hidden=!(s.photoOn && s.photo && result.lowContrast);
@@ -1402,7 +1401,6 @@ const SMFiles = (() => {
     $('slides').children[p.index].focus({preventScroll:true});
   };
   $('smaller').onclick=()=>{slide().role='H2';changed();};
-  $('guides').onchange=repaint;
   $('dimPhoto').oninput=()=>{
     const s=slide();
     s.dimOn=$('dimPhoto').checked;
