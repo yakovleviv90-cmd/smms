@@ -29,8 +29,9 @@ main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-column
 .primary { display:inline-flex; align-items:center; gap:8px; border-radius:24px; }
 .primary svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
 .studio { border:1px solid var(--container-high); border-radius:22px; }
-#frame {outline:1px solid #868882;outline-offset:-1px;}
-#frame:focus-visible {outline:2px solid var(--focus);outline-offset:-2px;}
+#frame {outline:0;}
+#frame.outlined {outline:1px solid #868882;outline-offset:-1px;}
+#stage:has(#frame:focus-visible) {outline:2px dashed var(--focus);outline-offset:-2px;}
 .tools { padding:7px; gap:4px; }
 .tools button {min-height:38px;border-radius:24px;}
 .tools button[aria-selected=true] {background:var(--accent);color:var(--on-accent);}
@@ -1095,9 +1096,9 @@ const SMFiles = (() => {
   const alignment = {left:'слева',center:'по центру'};
   function newSlide(cover) {
     return {title:cover?'Какой кофе пьёте утром?':'Один рецепт для двух проб',
-      role:cover?'H1':'H2',body:cover?'':'Заварите одну чашку и сравните вкус.',bodyOn:!cover,
+      role:cover?'H1':'H2',body:cover?'Расскажите, с какой чашки начинается ваш день.':'Заварите одну чашку и сравните вкус.',bodyOn:true,
       footer:false,logoOn:true,photo:'',photoOn:false,x:.5,y:.5,zoom:1,blur:0,darken:0,contrast:100,
-      align:'left',position:'top',logoBottom:false,ink:'auto',softShadow:false};
+      align:'left',position:'bottom',logoBottom:false,ink:'auto',softShadow:false};
   }
   function publication(mode) {
     return {mode,theme:'ink',font:'Inter',logo:'02',footerText:'',index:0,slides:[newSlide(true)]};
@@ -1145,6 +1146,7 @@ const SMFiles = (() => {
         if(token!==version)continue;
         if(frame.width!==buffer.width || frame.height!==buffer.height){frame.width=buffer.width;frame.height=buffer.height;}
         frame.getContext('2d',{willReadFrequently:true}).drawImage(buffer,0,0);
+        frame.classList.toggle('outlined', ['paper','iris','clay'].includes(p.theme));
         $('warning').hidden=!result.overflow; $('smaller').hidden=!result.h2Fits;
         $('warningText').textContent=result.overflow?'Текст выходит за безопасные поля. Сократите его.':'';
         $('contrastHelp').hidden=!(s.photoOn && s.photo && result.lowContrast);
