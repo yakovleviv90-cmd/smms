@@ -12,7 +12,7 @@
   --accent:#20211f; --on-accent:#fff; --focus:#4d4f49;
   background:var(--surface);color:var(--ink);accent-color:var(--accent);
 }
-*{box-sizing:border-box}body{margin:0}button,select,input,textarea{font:inherit;color:inherit}button,select,.fileButton{cursor:pointer}button{border:0;background:none}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,.fileButton:focus-within{outline:3px solid var(--focus);outline-offset:2px}
+*{box-sizing:border-box}body{margin:0}button,select,input,textarea{font:inherit;color:inherit}button,select,.fileButton{cursor:pointer}button{border:0;background:none}input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 header{height:72px;padding:0 max(24px,calc((100vw - 1320px)/2));display:flex;gap:18px;align-items:center;border-bottom:1px solid var(--line);background:var(--panel)}#saveState{font-size:12px;color:var(--muted);margin-left:auto}.primary,.fileButton{background:var(--accent);color:var(--on-accent);border-radius:24px;font-weight:600;padding:12px 22px;min-height:44px}.primary:disabled,button:disabled{opacity:.5;cursor:default}
 main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,390px);align-items:start;gap:24px}.studio{min-width:0;background:var(--surface);border-radius:16px;padding:0 18px}.seg,.tools{display:flex;gap:2px}.seg{margin:0 0 16px;width:100%;padding:3px;background:var(--container);border-radius:10px}.seg button{flex:1;min-width:0;padding:8px;min-height:44px;font-weight:550;font-size:14px;border-radius:8px}.seg button[aria-pressed=true]{background:var(--panel);box-shadow:0 1px 3px #00000018}
 #stage{display:grid;place-items:center;margin-block:12px;height:clamp(429px,calc(100svh - 180px),904px);padding:14px 0;overflow:hidden}#frame{display:block;background:var(--ink);max-width:100%;max-height:100%}#frame.pan{touch-action:none;cursor:grab}.slides,#slides{display:flex;align-items:center;gap:8px}.slides{border-top:1px solid var(--line);padding:8px 0;flex-wrap:wrap}#slides{max-width:100%;overflow-x:auto}#slides button,#addSlide{min-height:40px;min-width:40px;border-radius:7px;background:var(--panel);white-space:nowrap}#slides button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}#addSlide{padding:4px 12px}
@@ -87,11 +87,11 @@ main {width:100%;flex:1;min-height:0;margin:0 auto;grid-template-rows:minmax(0,1
 .photoDrawer form {flex:none;gap:8px;margin:0;min-height:52px;}
 .photoDrawer h2 {font-size:21px;}
 .photoDrawer form button {font-size:15px;font-weight:650;color:var(--accent);padding:0 4px;}
-.photoDrawer form button:focus {outline:none;}
-.photoDrawer form button:focus-visible {text-decoration:underline;text-underline-offset:4px;}
+button:focus {outline:none;}
+button:focus-visible,label.fileButton:has(input:focus-visible) {text-decoration:underline;text-underline-offset:3px;}
+#export:focus-visible svg {transform:scale(1.2);stroke-width:2.6;}
 .photoScroll {overflow-y:auto;overscroll-behavior:contain;min-height:0;padding:0 2px 16px;}
 .photoScroll input[type=range] {min-height:30px;}
-.photoScroll .fileButton:focus-within {outline:2px solid var(--accent);outline-offset:2px;}
 #photoError {font-size:14px;color:#843528;}
 @media(max-width:760px) and (orientation:portrait) {
   .studio {flex:none;}
