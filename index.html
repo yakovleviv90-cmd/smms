@@ -37,7 +37,7 @@ main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-column
 .tools button[aria-selected=true] {background:var(--accent);color:var(--on-accent);}
 .tools button[aria-selected=true]:after { display:none; }
 .layout { border-radius:12px; padding:9px 11px; }
-.layout:hover, .swatch:hover, #logos button:hover { border-color:var(--outline); }
+.layout:hover, .swatch:hover, #logos button:enabled:hover { border-color:var(--outline); }
 .mini { width:30px; height:37px; border-radius:4px; background:var(--container-high); }
 .mini:before { width:17px; }
 .layout[aria-pressed=true] .mini { background:var(--accent); }
@@ -59,7 +59,8 @@ main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-column
 #dimValue{min-width:4ch;text-align:right;font-variant-numeric:tabular-nums}
 #style {container-type:inline-size;}
 #logos {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
-@container (min-width:420px) {#logos {grid-template-columns:repeat(4,minmax(0,1fr));}}
+#logoNotice {position:fixed;z-index:5;bottom:calc(12px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);background:var(--ink);color:var(--on-accent);border-radius:12px;white-space:pre-line;font-size:14px;line-height:1.4;pointer-events:none;}
+#logoNotice:not(:empty) {padding:10px 16px;}
 html,.panel,.photoMenu,.photoScroll,.slides,#slides,textarea {scrollbar-width:none;}
 :is(html,.panel,.photoMenu,.photoScroll,.slides,#slides,textarea)::-webkit-scrollbar {display:none;}
 #removeSlide{min-height:42px;color:#864535;font-size:13px;padding:6px 10px}
@@ -114,6 +115,48 @@ main {width:100%;flex:1;min-height:0;margin:0 auto;grid-template-rows:minmax(0,1
 #rotationNotice[open] {display:grid;place-items:center;}
 #rotationNotice::backdrop {background:var(--panel);}
 html:has(#rotationNotice[open]) {overflow:hidden;}
+
+/* Compact controls for the editor; exported artwork has its own typography. */
+:root {--control-radius:8px;--control-height:44px;}
+.inspector .panel:not(#photo),.photoMenu {padding:12px;}
+.inspector h1,.photoDrawer h2 {font-size:18px;line-height:1.2;letter-spacing:-.025em;margin:0 0 8px;}
+.tools {padding:2px 8px;gap:2px;}
+.tools button,.seg button {min-height:var(--control-height);border-radius:var(--control-radius);font-size:14px;}
+.seg {padding:2px;gap:2px;margin-bottom:10px;}
+.seg button[aria-pressed=true] {background:var(--accent);color:var(--on-accent);box-shadow:none;}
+#layouts,#themes,#logos {gap:4px;margin:0 0 8px;}
+.layout,#logos button,.swatch {min-height:var(--control-height);border-radius:var(--control-radius);}
+#logos button {min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.layout {padding:4px 8px;gap:6px;}
+.mini {width:21px;height:30px;}
+.mini:before {width:13px;}
+.mini:after {width:8px;}
+.layout[aria-pressed=true],.swatch[aria-pressed=true],#logos button[aria-pressed=true] {color:var(--on-accent);background:var(--accent);box-shadow:none;}
+.layout[aria-pressed=true] .mini {background:var(--container);}
+.layout[aria-pressed=true] .mini:before,.layout[aria-pressed=true] .mini:after {background:var(--ink);}
+.swatch {gap:2px;padding:3px;}
+.swatch i {height:24px;font-size:16px;}
+@container (min-width:348px) {
+  #logos {grid-template-columns:repeat(4,minmax(0,1fr));}
+  #logos button {padding-inline:8px;}
+}
+.row,.slider,.photoTools button {min-height:var(--control-height);padding:4px 0;gap:8px;font-size:14px;}
+.row select {border-radius:var(--control-radius);padding:4px;min-height:32px;}
+.field {margin-bottom:6px;}
+.field input,.field textarea {padding:6px 8px;margin-top:3px;border-radius:var(--control-radius);}
+input[role=switch] {width:36px;height:22px;}
+input[role=switch]:before {width:16px;height:16px;}
+input[role=switch]:checked:before {left:17px;}
+.guide {position:relative;gap:6px;}
+.guide:before {content:'';position:absolute;inset:-5px 0;}
+.primary,.fileButton,#slides button,#addSlide,#removeSlide,.deleteActions button {border-radius:var(--control-radius);min-height:var(--control-height);}
+#slides button {min-width:var(--control-height);}
+.slides {gap:4px;padding:4px 0;}
+.photoDrawer {padding:0 12px;}
+.photoDrawer form {min-height:var(--control-height);}
+.photoDrawer h2 {margin:0;}
+.photoScroll {padding-bottom:8px;}
+.fileButton {margin:4px 0 8px;padding:10px 16px;}
 </style><link rel="manifest" data-app-manifest>
 <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png">
 <link rel="icon" href="./icon-192.png">
@@ -129,7 +172,7 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
 <main>
 <section class="studio" aria-label="Предпросмотр">
   <div id="stage"><canvas id="frame" width="1080" height="1920" role="button" tabindex="0" aria-label="Редактировать текст в кадре"></canvas></div>
-  <div class="caption"><span id="size"></span><span id="offlineStatus" role="status">Готовим офлайн-копию…</span><label class="guide"><input type="checkbox" id="guides">Поля</label></div>
+  <div class="caption"><span id="size"></span><span id="offlineStatus" role="status">Готовим офлайн-копию…</span><label class="guide">Поля<input type="checkbox" role="switch" id="guides"></label></div>
   <div class="slides" id="slideBar" hidden><div id="slides"></div><button id="addSlide">+ Добавить слайд</button><button id="removeSlide">Удалить слайд</button></div>
 </section>
 <section class="inspector" aria-label="Настройки слайда">
@@ -190,6 +233,7 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
 </dialog>
   </div>
 </section></main>
+<div id="logoNotice" role="status" aria-atomic="true"></div>
 <div id="warning" role="alert" hidden><span id="warningText"></span> <button id="smaller" hidden>Переключить на H2</button></div>
 <dialog id="deleteSheet" aria-labelledby="deleteTitle"><h2 id="deleteTitle"></h2><form method="dialog" class="deleteActions"><button value="cancel" autofocus>Отмена</button><button value="remove">Удалить</button></form></dialog>
 <dialog id="exportSheet"><form method="dialog"><h2>Экспорт</h2><button aria-label="Закрыть">×</button></form>
@@ -689,6 +733,16 @@ window.SMRender = (() => {
   const ongoing = new WeakMap();
   let lastPhoto, lastBackground;
 
+  function logoChoice(p, s) {
+    const hasBody = Boolean(s.bodyOn && s.body?.trim());
+    const hasHeading = Boolean(s.title?.trim());
+    const inter = !headingWeights.has(p.font) || p.font === 'Inter';
+    const symbolOnly = !inter && hasHeading && !hasBody;
+    const id = symbolOnly ? '04' : (p.logo || '02');
+    const suggestShortHeading = !inter && hasHeading && hasBody && s.logoOn && id !== '04';
+    return {id, symbolOnly, suggestShortHeading};
+  }
+
   function limit(value, min, max, fallback) {
     return Number.isFinite(value) ? Math.max(min, Math.min(max, value)) : fallback;
   }
@@ -965,7 +1019,7 @@ window.SMRender = (() => {
       document.fonts.load('400 42px "Inter"', [s.bodyOn && s.body, s.footer && p.footerText].filter(Boolean).join(' ') || 'Кофе')
     ]);
     if (ongoing.get(canvas) !== token) return {overflow: false, h2Fits: false, lowContrast: false, superseded: true};
-    const mark = s.logoOn ? logo(p.logo || '02') : null;
+    const mark = s.logoOn ? logo(logoChoice(p, s).id) : null;
     if (canvas.width !== W) canvas.width = W;
     if (canvas.height !== height) canvas.height = height;
     // Один способ растеризации для читаемого предпросмотра и нового экспортного холста.
@@ -998,7 +1052,7 @@ window.SMRender = (() => {
     }
     return {overflow: frame.overflow, h2Fits, lowContrast};
   }
-  return {render,themes};
+  return {render,themes,logoChoice};
 })();
 
 /* Offline draft storage and export. ZIP uses the uncompressed PKZIP format. */
@@ -1157,10 +1211,25 @@ const SMFiles = (() => {
     finally {painting=false;}
   }
   function showError(text){$('warningText').textContent=text;$('warning').hidden=false;$('smaller').hidden=true;}
+  let noticeTimer;
+  function logoNotice(text='') {
+    clearTimeout(noticeTimer);
+    $('logoNotice').textContent=text;
+    if(text)noticeTimer=setTimeout(()=>logoNotice(),4200);
+  }
+  function explainLogo(before, explicitChoice) {
+    const next=SMRender.logoChoice(project(),slide());
+    if(slide().logoOn && next.symbolOnly && before.id!=='04'){
+      logoNotice('Выбран знак без текста.\nНадпись в логотипе набрана Inter.');
+    } else if(next.suggestShortHeading && (explicitChoice || !before.suggestShortHeading)){
+      logoNotice('В логотипе — Inter.\nЛучше до двух строк в заголовке.');
+    } else if(!slide().logoOn || before.id!==next.id || before.symbolOnly!==next.symbolOnly ||
+      before.suggestShortHeading!==next.suggestShortHeading || explicitChoice)logoNotice();
+  }
   function renderSlideBar() {
     const p=project();
     $('slides').replaceChildren(...p.slides.map((_,i)=>{
-      const b=button(String(i+1),()=>{p.index=i;changed();renderSlideBar();});
+      const b=button(String(i+1),()=>{logoNotice();p.index=i;changed();renderSlideBar();});
       b.setAttribute('aria-label','Слайд '+(i+1));b.setAttribute('aria-pressed',i===p.index);return b;
     }));
   }
@@ -1175,7 +1244,11 @@ const SMFiles = (() => {
     for(const b of tabButtons){const active=tab===b.dataset.tab;b.setAttribute('aria-selected',active);$(b.dataset.tab).hidden=!active;}
     for(const b of $('layouts').children)b.setAttribute('aria-pressed',b.dataset.pos===s.position && b.dataset.align===s.align);
     for(const b of $('themes').children)b.setAttribute('aria-pressed',b.dataset.theme===p.theme);
-    for(const b of $('logos').children)b.setAttribute('aria-pressed',b.dataset.logo===p.logo);
+    const choice=SMRender.logoChoice(p,s);
+    for(const b of $('logos').children){
+      b.disabled=choice.symbolOnly && b.dataset.logo!=='04';
+      b.setAttribute('aria-pressed',b.dataset.logo===choice.id);
+    }
     $('size').textContent=format[state.mode].join(' × ')+' пкс';
     $('slideBar').hidden=state.mode!=='carousel';$('zip').hidden=state.mode!=='carousel';
     $('removeSlide').disabled=p.slides.length<=1;
@@ -1205,8 +1278,13 @@ const SMFiles = (() => {
     const swatch=document.createElement('i');swatch.style.background=SMRender.themes[id];swatch.style.color=['ink','plum'].includes(id)?'white':'black';swatch.textContent='Аа';swatch.setAttribute('aria-hidden','true');b.prepend(swatch);$('themes').append(b);
   }
   for(const [id,name] of Object.entries({'01':'Ингредиенты','02':'Знак','03':'Обжарка','04':'Без текста'})){
-    const b=button(name,()=>{project().logo=id;changed();});
+    const b=button(name,()=>{
+      const before=SMRender.logoChoice(project(),slide());
+      if(before.symbolOnly)return;
+      project().logo=id;changed();explainLogo(before,true);
+    });
     b.dataset.logo=id;
+    b.title=name;
     $('logos').append(b);
   }
   for(const el of all('[data-slide=ink]')){
@@ -1214,9 +1292,12 @@ const SMFiles = (() => {
   }
   for(const el of controls)el.addEventListener('input',()=>{
     const value=el.type==='checkbox'?el.checked:el.type==='range'?Number(el.value):el.hasAttribute('data-bool')?el.value==='true':el.value;
-    (el.dataset.slide?slide():project())[el.dataset.slide||el.dataset.project]=value;changed();
+    const key=el.dataset.slide||el.dataset.project;
+    const before=SMRender.logoChoice(project(),slide());
+    (el.dataset.slide?slide():project())[key]=value;changed();
+    if(['font','title','body','bodyOn','logoOn'].includes(key))explainLogo(before,key==='font');
   });
-  for(const b of modeButtons)b.onclick=()=>{photoSheet.close();state.mode=b.dataset.mode;changed();renderSlideBar();};
+  for(const b of modeButtons)b.onclick=()=>{photoSheet.close();logoNotice();state.mode=b.dataset.mode;changed();renderSlideBar();};
   for(const b of tabButtons)b.onclick=()=>{photoSheet.close();tab=b.dataset.tab;sync();};
   for(const trigger of all('[data-photo-tool]'))trigger.onclick=()=>{
     for(const pane of all('[data-photo-pane]'))pane.hidden=pane.dataset.photoPane!==trigger.dataset.photoTool;
@@ -1236,7 +1317,7 @@ const SMFiles = (() => {
       e.preventDefault();finishPhoto();
     }
   });
-  $('addSlide').onclick=()=>{const p=project();p.slides.push(newSlide(false));p.index=p.slides.length-1;changed();renderSlideBar();$('slides').lastChild.scrollIntoView({block:'nearest',inline:'nearest'});};
+  $('addSlide').onclick=()=>{logoNotice();const p=project();p.slides.push(newSlide(false));p.index=p.slides.length-1;changed();renderSlideBar();$('slides').lastChild.scrollIntoView({block:'nearest',inline:'nearest'});};
   $('removeSlide').onclick=()=>{
     const p=project();
     if(p.mode!=='carousel'||p.slides.length<2)return;
@@ -1248,6 +1329,7 @@ const SMFiles = (() => {
     if(event.submitter?.value!=='remove'||p.mode!=='carousel'||p.slides.length<2)return;
     event.preventDefault();
     $('deleteSheet').close();
+    logoNotice();
     p.slides.splice(p.index,1);
     p.index=Math.min(p.index,p.slides.length-1);
     changed();renderSlideBar();persist();
