@@ -37,7 +37,7 @@ main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-column
 .tools button[aria-selected=true] {background:var(--accent);color:var(--on-accent);}
 .tools button[aria-selected=true]:after { display:none; }
 .layout { border-radius:12px; padding:9px 11px; }
-.layout:hover, .swatch:hover, #logos button:enabled:hover { border-color:var(--outline); }
+.layout:hover, .swatch:hover, #logos button:enabled:hover:not([aria-pressed=true]) { border-color:var(--outline); }
 .mini { border-radius:4px; background:var(--container); }
 
 .layout[aria-pressed=true] .mini { background:var(--accent); }
@@ -136,7 +136,7 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
 .mini:before,.mini:after {content:'';height:2px;background:var(--muted);border-radius:1px;}
 .mini:before {width:14px;}
 .mini:after {width:8px;}
-.layout[aria-pressed=true],.swatch[aria-pressed=true],#logos button[aria-pressed=true] {border-color:var(--outline);color:var(--on-accent);background:var(--accent);box-shadow:none;}
+.layout[aria-pressed=true],.swatch[aria-pressed=true],#logos button[aria-pressed=true] {border-color:transparent;color:var(--on-accent);background:var(--accent);box-shadow:none;}
 .layout[aria-pressed=true] .mini {background:var(--container);}
 .layout[aria-pressed=true] .mini:before,.layout[aria-pressed=true] .mini:after {background:var(--ink);}
 .swatch {gap:2px;padding:3px;}
@@ -151,7 +151,7 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
 .field {margin-bottom:6px;}
 .field input,.field textarea {padding:6px 8px;margin-top:3px;border-radius:var(--control-radius);}
 input[role=switch] {width:36px;height:22px;border:1px solid var(--line);box-shadow:none;}
-input[role=switch]:checked {border-color:var(--outline);}
+input[role=switch]:checked {border-color:transparent;}
 input[role=switch]:before {width:16px;height:16px;top:2px;left:2px;}
 input[role=switch]:checked:before {left:16px;}
 
@@ -186,6 +186,7 @@ input[role=switch]:checked:before {left:16px;}
 :where(html,body,body *) {touch-action:pan-x pan-y;}
 #size {position:absolute;top:10px;right:10px;pointer-events:none;user-select:none;white-space:nowrap;font-size:10px;line-height:1;font-variant-numeric:tabular-nums;color:white;mix-blend-mode:difference;opacity:.25;}
 #saveState {flex:1 1 0;text-align:right;}
+button:not(.layout) > .buttonLabel {position:relative;top:-1px;}
 </style><link rel="manifest" data-app-manifest>
 <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png?v=silver">
 <link rel="icon" href="./icon-192.png?v=silver">
@@ -198,18 +199,18 @@ input[role=switch]:checked:before {left:16px;}
 <path d="M42.4309 20.9519C41.6195 20.9519 40.8969 20.8125 40.263 20.5336C39.6328 20.251 39.1347 19.8635 38.7689 19.3709C38.4067 18.8746 38.2201 18.3023 38.2093 17.654H40.5782C40.5926 17.9256 40.6814 18.1647 40.8444 18.3711C41.011 18.574 41.232 18.7316 41.5072 18.8438C41.7825 18.9561 42.0922 19.0123 42.4363 19.0123C42.7949 19.0123 43.1119 18.9489 43.3871 18.8221C43.6624 18.6953 43.8779 18.5197 44.0337 18.2951C44.1895 18.0705 44.2673 17.8115 44.2673 17.5181C44.2673 17.2211 44.184 16.9585 44.0174 16.7303C43.8544 16.4985 43.619 16.3174 43.3111 16.187C43.0068 16.0566 42.6446 15.9914 42.2244 15.9914H41.1867V14.2636H42.2244C42.5794 14.2636 42.8927 14.202 43.1644 14.0789C43.4397 13.9557 43.6534 13.7855 43.8055 13.5682C43.9576 13.3472 44.0337 13.09 44.0337 12.7966C44.0337 12.5177 43.9667 12.2732 43.8327 12.0632C43.7023 11.8494 43.5175 11.6828 43.2785 11.5633C43.043 11.4438 42.7678 11.384 42.4526 11.384C42.1339 11.384 41.8423 11.442 41.5779 11.5579C41.3135 11.6702 41.1016 11.8313 40.9422 12.0414C40.7828 12.2515 40.6977 12.4978 40.6868 12.7803H38.432C38.4429 12.1392 38.6258 11.5742 38.9808 11.0852C39.3358 10.5962 39.8139 10.214 40.4152 9.93876C41.0201 9.65985 41.7028 9.5204 42.4635 9.5204C43.2314 9.5204 43.9033 9.65985 44.4792 9.93876C45.0551 10.2177 45.5025 10.5944 45.8212 11.0689C46.1436 11.5398 46.303 12.0686 46.2994 12.6554C46.303 13.2784 46.1092 13.7982 45.718 14.2147C45.3304 14.6313 44.8251 14.8957 44.2021 15.008V15.0949C45.0207 15.1999 45.6438 15.4843 46.0712 15.9479C46.5022 16.4079 46.7159 16.9839 46.7123 17.6757C46.7159 18.3096 46.533 18.8728 46.1635 19.3654C45.7977 19.858 45.2924 20.2456 44.6477 20.5281C44.0029 20.8107 43.264 20.9519 42.4309 20.9519ZM48.4686 20.7998V9.67253H50.8212V14.2636H55.597V9.67253H57.9442V20.7998H55.597V16.2033H50.8212V20.7998H48.4686ZM61.8017 20.7998H59.2807L63.122 9.67253H66.1538L69.9896 20.7998H67.4686L64.6814 12.2153H64.5944L61.8017 20.7998ZM61.6442 16.426H67.599V18.2625H61.6442V16.426ZM78.0607 20.7998L74.4856 16.0566H73.6815V20.7998H71.3289V9.67253H73.6815V14.1169H74.1542L77.8488 9.67253H80.7773L76.4362 14.8341L80.9784 20.7998H78.0607Z" fill="black"/>
 </svg>
 </div><span id="saveState" role="status"></span>
-<div class="headerActions"><button id="clearEditor" disabled>Очистить</button><button id="export" class="primary" aria-label="Экспорт" title="Экспорт"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 15V3m-5 5 5-5 5 5M4 15v5h16v-5"/></svg></button></div></header>
+<div class="headerActions"><button id="clearEditor" disabled><span class="buttonLabel">Очистить</span></button><button id="export" class="primary" aria-label="Экспорт" title="Экспорт"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 15V3m-5 5 5-5 5 5M4 15v5h16v-5"/></svg></button></div></header>
 <main>
 <section class="studio" aria-label="Предпросмотр">
   <div id="stage"><div class="previewFrame"><canvas id="frame" width="1080" height="1920" role="button" tabindex="0" aria-label="Редактировать текст в кадре"></canvas><small id="size"></small></div></div>
   <div id="slideTray" inert><div class="slideClip">
-    <div class="slides" id="slideBar"><div id="slides"></div><button id="addSlide">+ Добавить слайд</button><button id="removeSlide">Удалить слайд</button></div>
+    <div class="slides" id="slideBar"><div id="slides"></div><button id="addSlide"><span class="buttonLabel">+ Добавить слайд</span></button><button id="removeSlide"><span class="buttonLabel">Удалить слайд</span></button></div>
   </div></div>
 </section>
 <section class="inspector" aria-label="Настройки слайда">
-  <nav class="tools" id="tabs" aria-label="Настройки"><button data-tab="layout">Макет</button><button data-tab="text">Текст</button><button data-tab="style">Стиль</button><button data-tab="photo">Фото</button></nav>
+  <nav class="tools" id="tabs" aria-label="Настройки"><button data-tab="layout"><span class="buttonLabel">Макет</span></button><button data-tab="text"><span class="buttonLabel">Текст</span></button><button data-tab="style"><span class="buttonLabel">Стиль</span></button><button data-tab="photo"><span class="buttonLabel">Фото</span></button></nav>
   <div id="layout" class="panel">
-    <nav class="seg" id="modes" aria-label="Формат публикации"><button data-mode="story">Сторис</button><button data-mode="post">Пост</button><button data-mode="carousel">Карусель</button></nav>
+    <nav class="seg" id="modes" aria-label="Формат публикации"><button data-mode="story"><span class="buttonLabel">Сторис</span></button><button data-mode="post"><span class="buttonLabel">Пост</span></button><button data-mode="carousel"><span class="buttonLabel">Карусель</span></button></nav>
     <h1>Композиция</h1><div id="layouts"></div>
     <label class="row">Поля<input type="checkbox" role="switch" id="guides"></label>
     <label class="row">Заголовок <select data-slide="role"><option>H1</option><option>H2</option></select></label>
@@ -231,14 +232,14 @@ input[role=switch]:checked:before {left:16px;}
   </div>
   <div id="photo" class="panel" hidden><div class="photoMenu"><h1>Фотография</h1>
     <div class="photoTools">
-      <button data-photo-tool="source" aria-haspopup="dialog">Выбрать фото</button>
-      <button data-photo-tool="crop" aria-haspopup="dialog">Настройки фото</button>
-      <button data-photo-tool="adjust" aria-haspopup="dialog">Эффекты</button>
+      <button data-photo-tool="source" aria-haspopup="dialog"><span class="buttonLabel">Выбрать фото</span></button>
+      <button data-photo-tool="crop" aria-haspopup="dialog"><span class="buttonLabel">Настройки фото</span></button>
+      <button data-photo-tool="adjust" aria-haspopup="dialog"><span class="buttonLabel">Эффекты</span></button>
     </div>
   </div>
 <dialog id="photoSheet" aria-labelledby="photoTitle">
   <section class="photoDrawer">
-    <form method="dialog"><h2 id="photoTitle"></h2><button autofocus>Готово</button></form>
+    <form method="dialog"><h2 id="photoTitle"></h2><button autofocus><span class="buttonLabel">Готово</span></button></form>
     <div class="photoScroll">
     <div data-photo-pane="source" hidden>
     <label class="fileButton">Открыть медиатеку<input type="file" accept="image/*" id="upload"></label>
@@ -266,14 +267,14 @@ input[role=switch]:checked:before {left:16px;}
   </div>
 </section></main>
 <div id="logoNotice" role="status" aria-atomic="true"></div>
-<div id="warning" role="alert" hidden><span id="warningText"></span> <button id="smaller" hidden>Переключить на H2</button></div>
-<dialog id="deleteSheet" aria-labelledby="deleteTitle"><h2 id="deleteTitle"></h2><form method="dialog" class="deleteActions"><button value="cancel" autofocus>Отмена</button><button value="remove">Удалить</button></form></dialog>
+<div id="warning" role="alert" hidden><span id="warningText"></span> <button id="smaller" hidden><span class="buttonLabel">Переключить на H2</span></button></div>
+<dialog id="deleteSheet" aria-labelledby="deleteTitle"><h2 id="deleteTitle"></h2><form method="dialog" class="deleteActions"><button value="cancel" autofocus><span class="buttonLabel">Отмена</span></button><button value="remove"><span class="buttonLabel">Удалить</span></button></form></dialog>
 <dialog id="resetSheet" aria-labelledby="resetTitle" aria-describedby="resetDescription"><h2 id="resetTitle">Очистить редактор?</h2>
 <p id="resetDescription">Из редактора «СММ Знака» будут удалены все черновики, слайды и добавленные фото. Фотографии в медиатеке сохранятся.</p>
 <p id="resetError" role="alert" hidden>Не удалось очистить редактор. Попробуйте ещё раз.</p>
-<form method="dialog" class="deleteActions"><button value="cancel" autofocus>Отмена</button><button value="remove">Очистить</button></form></dialog>
+<form method="dialog" class="deleteActions"><button value="cancel" autofocus><span class="buttonLabel">Отмена</span></button><button value="remove"><span class="buttonLabel">Очистить</span></button></form></dialog>
 <dialog id="exportSheet"><form method="dialog"><h2>Экспорт</h2><button aria-label="Закрыть">×</button></form>
-<button id="png" class="fileButton">Сохранить кадр PNG</button><button id="zip" class="fileButton">Сохранить карусель ZIP</button><p id="exportStatus" role="status"></p></dialog>
+<button id="png" class="fileButton"><span class="buttonLabel">Сохранить кадр PNG</span></button><button id="zip" class="fileButton"><span class="buttonLabel">Сохранить карусель ZIP</span></button><p id="exportStatus" role="status"></p></dialog>
 <dialog id="rotationNotice" closedby="none" aria-labelledby="rotationTitle"><h2 id="rotationTitle"></h2></dialog>
 <script type="text/plain" id="font-licenses">Inter
 Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)
@@ -1226,7 +1227,10 @@ const SMFiles = (() => {
   const modeButtons = all('[data-mode]'),tabButtons=all('[data-tab]');
   const controls=all('[data-slide],[data-project]');
   function button(label,action) {
-    const el=document.createElement('button'); el.textContent=label; el.onclick=action; return el;
+    const el=document.createElement('button');
+    const caption=document.createElement('span');
+    caption.className='buttonLabel';caption.textContent=label;
+    el.append(caption);el.onclick=action;return el;
   }
   function persist() {
     if (!ready || !storageAvailable) return;
