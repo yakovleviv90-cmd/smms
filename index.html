@@ -29,7 +29,7 @@ main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-column
 .primary { display:inline-flex; align-items:center; gap:8px; border-radius:24px; }
 .primary svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
 .studio { border:1px solid var(--container-high); border-radius:22px; }
-#frame {outline:0;}
+#frame {outline:0;border-radius:8px;}
 #frame.outlined {outline:1px solid #868882;outline-offset:-1px;}
 #stage:has(#frame:focus-visible) {outline:2px dashed var(--focus);outline-offset:-2px;}
 .tools { padding:7px; gap:4px; }
@@ -136,6 +136,7 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
 .layout[aria-pressed=true] .mini:before,.layout[aria-pressed=true] .mini:after {background:var(--ink);}
 .swatch {gap:2px;padding:3px;}
 .swatch i {height:24px;font-size:16px;}
+.swatch:is([data-theme=ink],[data-theme=plum])[aria-pressed=true] i {border-color:rgba(255,255,255,.46);}
 @container (min-width:348px) {
   #logos {grid-template-columns:repeat(4,minmax(0,1fr));}
   #logos button {padding-inline:8px;}
