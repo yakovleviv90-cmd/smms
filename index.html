@@ -152,7 +152,8 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
 .field input,.field textarea,.textEntry {padding:6px 8px;margin-top:3px;border-radius:var(--control-radius);}
 .textField {display:grid;gap:4px;}
 .textField + .textField {margin-top:12px;}
-.textFieldLabel {display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:28px;font-size:14px;font-weight:600;line-height:20px;cursor:pointer;}
+.textFieldLabel {display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:28px;cursor:pointer;}
+.textFieldLabel,.themeLabel {font-size:14px;font-weight:400;line-height:20px;}
 .textEntry {margin-top:0;line-height:1.35;}
 input[role=switch] {width:36px;height:22px;border:1px solid var(--line);box-shadow:none;}
 input[role=switch]:checked {border-color:transparent;}
@@ -239,7 +240,7 @@ button:not(.layout) > .buttonLabel {position:relative;top:-1px;}
       <input class="textEntry" id="footerField" aria-labelledby="footerLabel" type="text" data-project="footerText" hidden>
     </div>
   </div>
-  <div id="style" class="panel" hidden><h1>Оформление</h1><label class="field">Тема</label><div id="themes"></div>
+  <div id="style" class="panel" hidden><h1>Оформление</h1><div class="field themeLabel" id="themeLabel">Тема</div><div id="themes" role="group" aria-labelledby="themeLabel"></div>
     <label class="row">Шрифт заголовка<select data-project="font"><option>Inter</option><option>Manrope</option><option>Lora</option><option>Unbounded</option><option>Russo One</option></select></label>
     <label class="row">Показывать логотип<input type="checkbox" data-slide="logoOn" role="switch"></label>
     <div id="logos" aria-label="Логотип серии"></div>
