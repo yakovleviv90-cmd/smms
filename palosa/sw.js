@@ -1,38 +1,19 @@
-const scope = self.registration.scope;
-const prefix = 'smms-offline:' + scope + ':';
-const cacheName = prefix + 'b7452cf7a1dd9c874f0e';
-const assets = ['index.html', 'manifest.webmanifest', 'wide.webmanifest', 'icon-180.png', 'icon-192.png', 'icon-512.png'];
-const urls = assets.map(path => new URL(path, scope).href);
-
-self.addEventListener('install', event => {
-  event.waitUntil((async () => {
-    const cache = await caches.open(cacheName);
-    await cache.addAll(urls.map(url => new Request(url, {cache: 'reload'})));
-    await self.skipWaiting();
+// Keep old Home Screen drafts and the previously downloaded offline editor accessible.
+const oldHome=self.registration.scope;
+const oldIndex=new URL('index.html',oldHome).href;
+self.addEventListener('install',event=>event.waitUntil(self.skipWaiting()));
+self.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));
+self.addEventListener('fetch',event=>{
+  if(event.request.mode!=='navigate')return;
+  const url=new URL(event.request.url);
+  url.search='';
+  if(url.href!==oldHome && url.href!==oldIndex)return;
+  event.respondWith((async()=>{
+    try{
+      const response=await fetch(event.request,{cache:'no-cache'});
+      if(response.ok)return response;
+    }catch{ /* Offline installations may still have the original editor. */ }
+    return await caches.match(oldIndex) || Response.redirect(new URL('/palosa-studio/',oldHome).href);
   })());
 });
 
-self.addEventListener('activate', event => {
-  event.waitUntil((async () => {
-    for (const name of await caches.keys()) {
-      if (name.startsWith(prefix) && name !== cacheName) await caches.delete(name);
-    }
-    await self.clients.claim();
-  })());
-});
-
-self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
-  const url = new URL(event.request.url);
-  url.search = '';
-  const key = url.href === scope ? urls[0] : url.href;
-  if (!urls.includes(key)) return;
-  event.respondWith((async () => {
-    const cache = await caches.open(cacheName);
-    const response = await cache.match(key);
-    if (response) return response;
-    const fresh = await fetch(new Request(key, {cache: 'reload'}));
-    if (fresh.ok) await cache.put(key, fresh.clone());
-    return fresh;
-  })());
-});

@@ -51,8 +51,8 @@ main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-column
 #style {container-type:inline-size;}
 #logos {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
 @container (min-width:420px) {#logos {grid-template-columns:repeat(4,minmax(0,1fr));}}
-html,.photoMenu,.photoScroll,.slides,#slides,textarea {scrollbar-width:none;}
-:is(html,.photoMenu,.photoScroll,.slides,#slides,textarea)::-webkit-scrollbar {display:none;}
+html,.panel,.photoMenu,.photoScroll,.slides,#slides,textarea {scrollbar-width:none;}
+:is(html,.panel,.photoMenu,.photoScroll,.slides,#slides,textarea)::-webkit-scrollbar {display:none;}
 #removeSlide{min-height:42px;color:#864535;font-size:13px;padding:6px 10px}
 #removeSlide:disabled{color:var(--muted)}
 dialog .deleteActions{margin:20px 0 0;justify-content:flex-end;gap:8px}
@@ -62,7 +62,14 @@ dialog .deleteActions{margin:20px 0 0;justify-content:flex-end;gap:8px}
 .photoTools button {display:flex;align-items:center;justify-content:space-between;padding:12px 4px;min-height:48px;border-top:1px solid var(--line);font-size:15px;text-align:left;}
 .photoTools button::after {content:'';width:8px;height:8px;margin-right:5px;border:solid var(--muted);border-width:1.5px 1.5px 0 0;transform:rotate(45deg);}
 .photoTools button:disabled {opacity:.5;}
-#photo {padding:0;height:clamp(220px,calc(100svh - 180px),440px);min-height:0;}
+html {overflow:hidden;}
+body {height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;}
+body > header,#warning {flex:none;}
+main {width:100%;flex:1;min-height:0;margin:0 auto;grid-template-rows:minmax(0,1fr);}
+.inspector {display:flex;flex-direction:column;min-height:0;max-height:100%;align-self:stretch;}
+.inspector .tools {flex:none;position:static;}
+.inspector .panel {flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;}
+#photo {padding:0;overflow:hidden;}
 .photoMenu {height:100%;overflow:auto;padding:22px;}
 #photo:has(#photoSheet[open]) .photoMenu {display:none;}
 #photoSheet {position:static;width:100%;height:100%;margin:0;padding:0;border:0;border-radius:0;background:white;color:inherit;}
@@ -77,22 +84,17 @@ dialog .deleteActions{margin:20px 0 0;justify-content:flex-end;gap:8px}
 .photoScroll .fileButton:focus-within {outline:2px solid var(--accent);outline-offset:2px;}
 #photoError {font-size:14px;color:#843528;}
 @media(max-width:760px) and (orientation:portrait) {
-  body:has(#photo:not([hidden])) {height:100dvh;display:flex;flex-direction:column;overflow:hidden;}
-  body:has(#photo:not([hidden])) > header {flex:none;}
-  main:has(#photo:not([hidden])) {width:100%;flex:1;min-height:0;margin:0;}
-  main:has(#photo:not([hidden])) .studio {flex:none;}
-  main:has(#photo:not([hidden])) #stage {height:clamp(160px,min(46svh,calc(100svh - 365px)),490px);}
-  .inspector:has(#photo:not([hidden])) {display:flex;flex-direction:column;flex:1;min-height:0;}
-  .inspector:has(#photo:not([hidden])) .tools {flex:none;}
+  .studio {flex:none;}
+  #stage {height:clamp(160px,min(46svh,calc(100svh - 365px)),490px);}
+  .inspector {flex:1;}
   main:has(#photoSheet[open]) :is(.caption,.slides,.tools) {display:none;}
   main:has(#photoSheet[open]) .inspector {border-radius:18px 18px 0 0;}
-  #photo {flex:1;height:auto;}
   .photoMenu {padding:12px 16px;}
   .photoDrawer {padding:0 16px;}
   .photoScroll {padding-bottom:12px;}
   @media(max-height:680px) {
-    main:has(#photo:not([hidden])) .slides {flex-wrap:nowrap;overflow-x:auto;}
-    main:has(#photo:not([hidden])) .slides > * {flex:none;}
+    .slides {flex-wrap:nowrap;overflow-x:auto;}
+    .slides > * {flex:none;}
   }
   @media(prefers-reduced-motion:no-preference) {
     #photoSheet[open] .photoDrawer {animation:photoDrawerIn .18s ease-out;}
