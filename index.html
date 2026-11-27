@@ -136,7 +136,8 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
   <nav class="tools" id="tabs" aria-label="Настройки"><button data-tab="layout">Макет</button><button data-tab="text">Текст</button><button data-tab="style">Стиль</button><button data-tab="photo">Фото</button></nav>
   <div id="layout" class="panel"><h1>Композиция</h1><div id="layouts"></div>
     <label class="row">Заголовок <select data-slide="role"><option>H1</option><option>H2</option></select></label>
-    <label class="row" id="logoPosition">Логотип <select data-slide="logoBottom" data-bool><option value="false">Над заголовком</option><option value="true">У нижнего края</option></select></label>
+    <label class="row" id="logoPosition">Расположение блоков <select data-slide="logoBottom" data-bool><option value="false">Рядом</option><option value="true">По краям</option></select></label>
+    <label class="row" id="swapRow">Поменять местами текст и логотип<input type="checkbox" data-slide="swapBlocks" role="switch"></label>
   </div>
   <div id="text" class="panel" hidden><h1>Текст слайда</h1>
     <label class="field">Заголовок<textarea data-slide="title" rows="2"></textarea></label>
@@ -873,7 +874,7 @@ window.SMRender = (() => {
     const story = h === 1920, center = s.align === 'center';
     const top = story ? 224 : 96, bottom = story ? h - 256 : h - 96;
     const h1 = role === 'H1', size = h1 ? 96 : 72;
-    const heading = textGroup(lines(g, s.title, family, headingWeights.get(family), size, size * (h1 ? .95 : 1.10), center));
+    const heading = textGroup(lines(g, s.title, family, headingWeights.get(family), size, size * .95, center));
     const body = textGroup(lines(g, s.bodyOn && s.body, 'Inter', 400, 42, 42 * 1.30, center));
     const bodyStart = heading.height + (heading.items.length && body.items.length ? (h1 ? 32 : 24) : 0);
     for (const l of body.items) {
@@ -882,19 +883,35 @@ window.SMRender = (() => {
     }
     const group = {items: heading.items.concat(body.items), height: bodyStart + body.height};
     const foot = textGroup(lines(g, s.footer && p.footerText, 'Inter', 400, 32, 32 * 1.30, center));
-    let availableTop = top, availableBottom = bottom;
+    let availableBottom = bottom;
     const zones = [];
     if (foot.height) {
       zones.push(groupAt(foot, bottom - foot.height));
       availableBottom -= foot.height + 32;
     }
+    function positionBlock(position, height, minTop) {
+      const lastTop = availableBottom - height;
+      if (position === 'bottom') return lastTop;
+      if (position === 'middle') return Math.min(lastTop, Math.max(minTop, (top + bottom - height) / 2));
+      return minTop;
+    }
+    let start = positionBlock(s.position, group.height, top);
+    let requiredHeight = group.height;
     if (mark) {
       const height = 96, width = height * mark.view[2] / mark.view[3];
       const x = center ? (W - width) / 2 : SIDE;
-      const atBottom = s.position === 'top' && s.logoBottom;
-      const y = atBottom ? availableBottom - height : top;
-      if (atBottom) availableBottom = y - 40;
-      else availableTop = y + height + 60;
+      const oppositeEdges = s.position === 'top' && !!s.logoBottom;
+      const swapped = !!s.swapBlocks && group.height > 0;
+      const textFirst = oppositeEdges !== swapped;
+      let gap = 60;
+      if (oppositeEdges) gap = 40;
+      if (!group.height) gap = 0;
+      const firstHeight = textFirst ? group.height : height;
+      const secondHeight = textFirst ? height : group.height;
+      const secondTop = positionBlock(oppositeEdges ? 'bottom' : s.position, secondHeight, top + firstHeight + gap);
+      start = textFirst ? top : secondTop;
+      const y = textFirst ? secondTop : top;
+      requiredHeight += height + gap;
       zones.push({top: y, boxes: [{x, y, w: width, h: height}],
         draw(g) {
           g.save(); g.translate(x, y); g.scale(width / mark.view[2], height / mark.view[3]);
@@ -903,13 +920,9 @@ window.SMRender = (() => {
           g.restore();
         }});
     }
-    let start = availableTop;
-    if (s.position === 'bottom') start = availableBottom - group.height;
-    if (s.position === 'middle') start = Math.min(availableBottom - group.height,
-      Math.max(availableTop, (top + bottom - group.height) / 2));
     const main = groupAt(group, start);
     if (main) zones.push(main);
-    const overflow = group.height > availableBottom - availableTop ||
+    const overflow = requiredHeight > availableBottom - top ||
       zones.some(z => z.boxes.some(b => b.x < SIDE - 4 || b.x + b.w > W - SIDE + 4 || b.y < top - 2 || b.y + b.h > bottom + 2));
     zones.sort((a, b) => a.top - b.top);
     return {zones, top, bottom, overflow};
@@ -1164,6 +1177,7 @@ const SMFiles = (() => {
     $('slideBar').hidden=state.mode!=='carousel';$('zip').hidden=state.mode!=='carousel';
     $('removeSlide').disabled=p.slides.length<=1;
     $('logoPosition').hidden=s.position!=='top'||!s.logoOn;
+    $('swapRow').hidden=!s.logoOn || !(s.title?.trim() || (s.bodyOn && s.body?.trim()));
     $('bodyField').hidden=!s.bodyOn;$('footerField').hidden=!s.footer;
     $('crop').disabled=$('effects').disabled=!s.photo||!s.photoOn;
     document.querySelector('[data-photo-tool=crop]').disabled=$('crop').disabled;
