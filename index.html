@@ -18,7 +18,7 @@ main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-column
 #stage{display:grid;place-items:center;margin-block:12px;height:clamp(429px,calc(100svh - 180px),904px);padding:14px 0;overflow:hidden}#frame{display:block;background:var(--ink);max-width:100%;max-height:100%}#frame.pan{touch-action:none;cursor:grab}.slides,#slides{display:flex;align-items:center;gap:8px}.slides{border-top:1px solid var(--line);padding:8px 0;flex-wrap:wrap}#slides{max-width:100%;overflow-x:auto}#slides button,#addSlide{min-height:40px;min-width:40px;border-radius:7px;background:var(--panel);white-space:nowrap}#slides button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}#addSlide{padding:4px 12px}
 .inspector{background:var(--panel);border:1px solid var(--line);border-radius:20px;min-width:0;overflow:hidden}.tools{border-bottom:1px solid var(--line);padding:0 10px}.tools button{position:relative;flex:1;min-height:50px;color:var(--muted);font-size:14px}.tools button[aria-selected=true]{color:var(--accent);font-weight:690}.tools button[aria-selected=true]:after{content:'';position:absolute;bottom:0;height:3px;left:12px;right:12px;background:var(--accent);border-radius:3px}.panel{padding:22px}h1,h2{margin:0 0 20px;font-size:25px;line-height:1.15;letter-spacing:-.035em}#layouts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}.layout{display:flex;align-items:center;gap:9px;padding:8px;border:1px solid var(--line);border-radius:9px;text-align:left;font-size:13px;font-weight:550}.layout[aria-pressed=true],.swatch[aria-pressed=true],#logos button[aria-pressed=true]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--container)}
 .row,.slider{padding:10px 0;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:50px;font-size:14px}select{max-width:58%;background:var(--container);padding:7px 5px;border:0;border-radius:6px}input[role=switch]{appearance:none;width:43px;height:26px;flex:none;border-radius:20px;margin:0;background:var(--container);box-shadow:inset 0 0 0 1px var(--outline);position:relative;cursor:pointer}input[role=switch]:checked{background:var(--accent);box-shadow:none}input[role=switch]:before{content:'';position:absolute;background:var(--panel);border-radius:50%;width:20px;height:20px;top:3px;left:3px}input[role=switch]:checked:before{left:20px}
-.field{display:block;font-size:13px;font-weight:600;margin-bottom:12px}.field input,.field textarea,.textEntry{width:100%;display:block;border:1px solid var(--outline);background:var(--panel);border-radius:8px;padding:10px;margin-top:7px;font-size:16px;font-weight:400;resize:vertical}.fileButton{display:block;text-align:center;margin:8px 0 16px;position:relative}.fileButton input{width:100%;height:100%;position:absolute;inset:0;opacity:0;cursor:pointer}fieldset{border:0;padding:0;margin:0}.slider input{width:52%;accent-color:var(--accent)}fieldset:disabled{opacity:.5}#themes,#logos{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 18px}.swatch,#logos button{border:1px solid var(--line);border-radius:7px;min-height:44px;padding:6px 8px;font-size:12px}.swatch i{display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid #0002;vertical-align:middle;margin-right:4px}#logos button{flex:1;min-width:54px}
+.field{display:block;font-size:13px;font-weight:600;margin-bottom:12px}.field input,.field textarea,.textEntry{width:100%;display:block;border:1px solid var(--outline);background:var(--panel);border-radius:8px;padding:10px;margin-top:7px;font-size:16px;font-weight:400;resize:vertical}.fileButton{display:block;text-align:center;margin:8px 0 16px;position:relative}.fileButton input{width:100%;height:100%;position:absolute;inset:0;opacity:0;cursor:pointer}fieldset{border:0;padding:0;margin:0}fieldset:disabled{opacity:.5}#themes,#logos{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 18px}.swatch,#logos button{border:1px solid var(--line);border-radius:7px;min-height:44px;padding:6px 8px;font-size:12px}.swatch i{display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid #0002;vertical-align:middle;margin-right:4px}#logos button{flex:1;min-width:54px}
 #warning{position:sticky;bottom:0;padding:12px max(18px,calc((100vw - 900px)/2));background:#ffe8c8;color:#583512;font-size:14px}#warning button{text-decoration:underline;font-weight:600}dialog{border:1px solid var(--line);border-radius:16px;width:min(390px,92vw);padding:22px;background:var(--panel)}dialog::backdrop{background:#20211f66}dialog form{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}dialog h2{margin:0}dialog form button{font-size:24px;min-width:44px;height:44px}dialog>.fileButton{width:100%;margin:7px 0}#exportStatus{margin:12px 0 0}#exportStatus:empty{display:none}.sr{position:absolute;overflow:hidden;clip-path:inset(100%);width:1px;height:1px}[hidden]{display:none!important}
 @media(max-width:760px){header{height:calc(54px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 14px 0;gap:8px}.primary{padding:7px 14px;min-height:38px}main{display:flex;flex-direction:column;padding:0 0 env(safe-area-inset-bottom);gap:0}.studio,.inspector{width:100%;border-radius:0}.studio{padding:0 14px}#stage{margin-block:5px;height:clamp(305px,calc(46svh + 75px),565px);padding:10px 0}.inspector{border:0;border-top:1px solid var(--line)}.panel{padding:16px}.tools button{min-height:45px}h1{font-size:21px;margin-bottom:14px}#layouts{grid-template-columns:repeat(3,1fr);gap:6px}.layout{flex-direction:column;gap:5px;justify-content:center;padding:6px 2px;font-size:11px}.row select{font-size:16px}.tools{position:sticky;top:0;background:var(--panel);z-index:1}}
 @media(max-width:760px){#layouts{grid-template-columns:1fr 1fr}.layout{flex-direction:row;justify-content:flex-start;padding:8px;min-height:52px;font-size:12px}}
@@ -56,7 +56,6 @@ main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-column
   .panel {padding-top:17px;}
 }
 #dimLevel:has(input:disabled){opacity:.55}
-#dimValue{min-width:4ch;text-align:right;font-variant-numeric:tabular-nums}
 #style {container-type:inline-size;}
 #logos {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
 #logoNotice {position:fixed;z-index:5;bottom:calc(12px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);background:var(--ink);color:var(--on-accent);border-radius:12px;white-space:pre-line;font-size:14px;line-height:1.4;pointer-events:none;}
@@ -91,7 +90,6 @@ button:focus {outline:none;}
 button:focus-visible,label.fileButton:has(input:focus-visible) {text-decoration:underline;text-underline-offset:3px;}
 #export:focus-visible svg {transform:scale(1.2);stroke-width:2.6;}
 .photoScroll {overflow-y:auto;overscroll-behavior:contain;min-height:0;padding:0 2px 16px;}
-.photoScroll input[type=range] {min-height:30px;}
 #photoError {font-size:14px;color:#843528;}
 @media(max-width:760px) and (orientation:portrait) {
   .studio {flex:none;}
@@ -196,6 +194,14 @@ main:has(#guides:checked) #guideOverlay {display:block;}
 #size {position:absolute;top:10px;right:10px;pointer-events:none;user-select:none;white-space:nowrap;font-size:10px;line-height:1;font-variant-numeric:tabular-nums;}
 #saveState {flex:1 1 0;text-align:right;}
 button:not(.layout) > .buttonLabel {position:relative;top:-1px;}
+
+.photoStepper {flex:0 0 52%;display:grid;grid-template-columns:34px minmax(0,1fr) 34px;align-items:center;}
+.photoStepper button,.photoActions button {background:var(--container,var(--control));border-radius:var(--control-radius);}
+.photoStepper button {height:34px;font-size:17px;}
+.photoStepper output {line-height:20px;text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.photoActions {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:8px;}
+.photoActions button {min-height:var(--control-height);padding:4px;font-size:14px;}
+.photoActions button[aria-pressed=true] {background:var(--accent);color:var(--on-accent);}
 </style><link rel="manifest" data-app-manifest>
 <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png?v=ffffff-charcoal">
 <link rel="icon" href="./icon-192.png?v=ffffff-charcoal">
@@ -263,16 +269,26 @@ button:not(.layout) > .buttonLabel {position:relative;top:-1px;}
     <p id="photoError" role="alert" hidden></p>
     </div>
     <fieldset id="crop" data-photo-pane="crop" hidden><legend class="sr">Кадрирование</legend>
-    <label class="slider">Масштаб<input type="range" min="1" max="3" step=".02" data-slide="zoom"></label>
-    <label class="slider">По горизонтали<input type="range" min="0" max="1" step=".01" data-slide="x"></label>
-    <label class="slider">По вертикали<input type="range" min="0" max="1" step=".01" data-slide="y"></label>
+    <div class="slider"><span>Масштаб</span><input type="number" hidden min="1" max="3" step="0.02" data-default="1" data-slide="zoom" data-photo-step="scale"></div>
+    <div class="slider"><span>По горизонтали</span><input type="number" hidden min="0" max="1" step="0.01" data-default="0.5" data-slide="x" data-photo-step="scale"></div>
+    <div class="slider"><span>По вертикали</span><input type="number" hidden min="0" max="1" step="0.01" data-default="0.5" data-slide="y" data-photo-step="scale"></div>
+    <div class="slider"><span>Поворот</span><input type="number" hidden min="0" max="359" step="1" data-default="0" data-slide="rotation" data-photo-step="degrees"></div>
+    <div class="photoActions">
+      <button id="rotatePhoto" type="button"><span class="buttonLabel">Повернуть на 90°</span></button>
+      <button id="flipPhoto" type="button" aria-label="Отразить фото по горизонтали" aria-pressed="false"><span class="buttonLabel">Отразить фото</span></button>
+    </div>
     </fieldset>
     <div data-photo-pane="adjust" hidden>
     <fieldset id="effects"><legend class="sr">Эффекты фотографии</legend>
-    <label class="slider">Размытие<input type="range" min="0" max="20" data-slide="blur"></label>
-    <label class="slider">Контраст<input type="range" min="50" max="150" data-slide="contrast"></label>
+    <div class="slider"><span>Размытие</span><input type="number" hidden min="0" max="20" step="1" data-default="0" data-slide="blur" data-photo-step="value"></div>
+    <div class="slider"><span>Контраст</span><input type="number" hidden min="50" max="150" step="1" data-default="100" data-slide="contrast" data-photo-step="percent"></div>
+    <div class="slider"><span>Яркость</span><input type="number" hidden min="-100" max="100" step="1" data-default="0" data-slide="brightness" data-photo-step="percent"></div>
+    <div class="slider"><span>Насыщенность</span><input type="number" hidden min="-100" max="100" step="1" data-default="0" data-slide="saturation" data-photo-step="percent"></div>
+    <div class="slider"><span>Теплота</span><input type="number" hidden min="-100" max="100" step="1" data-default="0" data-slide="warmth" data-photo-step="percent"></div>
+    <div class="slider"><span>Света</span><input type="number" hidden min="-100" max="100" step="1" data-default="0" data-slide="highlights" data-photo-step="percent"></div>
+    <div class="slider"><span>Тени</span><input type="number" hidden min="-100" max="100" step="1" data-default="0" data-slide="shadows" data-photo-step="percent"></div>
     <label class="row">Затемнить фото<input id="dimPhoto" type="checkbox" role="switch"></label>
-    <label class="slider" id="dimLevel">Сила <output id="dimValue"></output><input type="range" min="0" max="100" data-slide="darken" aria-label="Сила затемнения"></label>
+    <div class="slider" id="dimLevel"><span>Сила</span><input type="number" hidden min="0" max="100" step="1" data-default="0" data-slide="darken" data-photo-step="percent"></div>
     </fieldset>
     <label class="row">Мягкая тень<input type="checkbox" data-slide="softShadow" role="switch"></label>
     <p id="contrastHelp" hidden>Под текстом или логотипом есть участки с контрастом ниже 4,5:1. Попробуйте изменить кадрирование или затемнить фото и выбрать светлый текст.</p>
@@ -796,9 +812,6 @@ window.SMRender = (() => {
     return {id, symbolOnly, suggestShortHeading};
   }
 
-  function limit(value, min, max, fallback) {
-    return Number.isFinite(value) ? Math.max(min, Math.min(max, value)) : fallback;
-  }
   function surface(w, h) {
     const canvas = document.createElement('canvas');
     canvas.width = w;
@@ -831,79 +844,23 @@ window.SMRender = (() => {
   }
 
   // Размытие со скользящим средним работает также в WebView без canvas.filter.
-  function blurPass(source, output, w, h, radius, vertical) {
-    const length = vertical ? h : w, count = vertical ? w : h;
-    const stride = vertical ? w * 4 : 4, divisor = radius * 2 + 1;
-    for (let line = 0; line < count; line++) {
-      const start = vertical ? line * 4 : line * w * 4;
-      for (let channel = 0; channel < 3; channel++) {
-        const base = start + channel;
-        let sum = source[base] * (radius + 1);
-        for (let i = 1; i <= radius; i++) sum += source[base + Math.min(i, length - 1) * stride];
-        for (let i = 0; i < length; i++) {
-          output[base + i * stride] = sum / divisor;
-          sum += source[base + Math.min(length - 1, i + radius + 1) * stride]
-            - source[base + Math.max(0, i - radius) * stride];
-        }
-      }
+  function background(h, project, s, image, {width=W,height=h}={}) {
+    const theme=themes[project.theme] || themes.paper;
+    const cacheable=width===W && height===h;
+    const edits=['x','y','zoom','rotation','flipPhoto','blur','dimOn','darken','contrast',
+      'brightness','saturation','warmth','highlights','shadows'];
+    const key=[h,theme,image,...edits.map(name=>s[name])];
+    if(cacheable && lastBackground && key.every((value,i)=>value===lastBackground.key[i]))
+      return lastBackground.canvas;
+    const canvas=surface(width,height);
+    const g=canvas.getContext('2d',{willReadFrequently:true});
+    g.fillStyle=theme;
+    g.fillRect(0,0,width,height);
+    if(image)renderPhotoLayer(canvas,W,h,image,s,cacheable);
+    if(cacheable) {
+      if(lastBackground)lastBackground.canvas.width=lastBackground.canvas.height=1;
+      lastBackground={key,canvas};
     }
-  }
-  function background(h, project, s, image) {
-    const theme = themes[project.theme] || themes.paper;
-    const dimming = s.dimOn === false ? 0 : limit(s.darken, 0, 100, 0);
-    const key = [h, theme, image, s.x, s.y, s.zoom, s.blur, dimming, s.contrast];
-    if (lastBackground && key.every((v, i) => v === lastBackground.key[i])) return lastBackground.canvas;
-    const canvas = surface(W, h);
-    const g = canvas.getContext('2d', {willReadFrequently: true});
-    g.fillStyle = theme;
-    g.fillRect(0, 0, W, h);
-    if (image) {
-      const blur = limit(s.blur, 0, 20, 0), divisor = blur >= 4 ? 2 : 1;
-      const small = divisor === 1 ? canvas : surface(W / divisor, h / divisor);
-      const c = divisor === 1 ? g : small.getContext('2d', {willReadFrequently: true});
-      c.fillStyle = theme;
-      c.fillRect(0, 0, small.width, small.height);
-      const scale = Math.max(W / image.width, h / image.height) * limit(s.zoom, 1, 3, 1);
-      const sw = W / scale, sh = h / scale;
-      c.drawImage(image, (image.width - sw) * limit(s.x, 0, 1, .5),
-        (image.height - sh) * limit(s.y, 0, 1, .5), sw, sh, 0, 0, small.width, small.height);
-      const contrast = limit(s.contrast, 50, 150, 100) / 100;
-      // Графит сохраняет исходные цвета снимка. У остальных тем оттенок ровный по всему кадру.
-      if (theme !== themes.ink) {
-        c.save();
-        c.globalAlpha = .22;
-        c.fillStyle = theme;
-        c.fillRect(0, 0, small.width, small.height);
-        c.restore();
-      }
-      const light = 1 - dimming / 100;
-      if (blur || contrast !== 1 || light !== 1) {
-        const pixels = c.getImageData(0, 0, small.width, small.height);
-        const bytes = pixels.data;
-        if (blur) {
-          const radius = Math.max(1, Math.round(blur / divisor));
-          const scratch = new Uint8ClampedArray(bytes.length);
-          for (let pass = 0; pass < 2; pass++) {
-            blurPass(bytes, scratch, small.width, small.height, radius, false);
-            blurPass(scratch, bytes, small.width, small.height, radius, true);
-          }
-        }
-        if (contrast !== 1 || light !== 1) {
-          const lookup = Uint8ClampedArray.from({length: 256}, (_, i) =>
-            Math.max(0, Math.min(255, (i - 127.5) * contrast + 127.5)) * light);
-          for (let i = 0; i < bytes.length; i += 4) {
-            bytes[i] = lookup[bytes[i]]; bytes[i+1] = lookup[bytes[i+1]]; bytes[i+2] = lookup[bytes[i+2]];
-          }
-        }
-        c.putImageData(pixels, 0, 0);
-      }
-      if (small !== canvas) {
-        g.drawImage(small, 0, 0, W, h);
-        small.width = small.height = 1;
-      }
-    }
-    if (lastBackground) lastBackground.canvas.width = lastBackground.canvas.height = 1;
-    lastBackground = {key, canvas};
     return canvas;
   }
 
@@ -1206,6 +1163,212 @@ const SMFiles = (() => {
   return {read,write,asDataURL,save,zip};
 })();
 
+function photoAngle(angle) {
+  return ((Number(angle) || 0) % 360 + 360) % 360;
+}
+
+function photoGeometry(width,height,sourceWidth,sourceHeight,settings) {
+  const radians=photoAngle(settings.rotation)*Math.PI/180;
+  const snap=value=>Math.abs(value)<1e-10?0:value;
+  const cos=snap(Math.cos(radians)), sin=snap(Math.sin(radians));
+  const a=Math.abs(cos), b=Math.abs(sin);
+  const cropWidth=width*a+height*b, cropHeight=width*b+height*a;
+  const zoom=Math.max(1,Math.min(3,Number(settings.zoom)||1));
+  const scale=Math.max(cropWidth/sourceWidth,cropHeight/sourceHeight)*zoom;
+  const u=Math.max(0,(sourceWidth*scale-cropWidth)/2);
+  const v=Math.max(0,(sourceHeight*scale-cropHeight)/2);
+  const maxX=a*u+b*v, maxY=b*u+a*v;
+  const mirror=settings.flipPhoto?-1:1;
+  function constrain(x,y) {
+    const along=Math.max(-u,Math.min(u,cos*x*mirror+sin*y));
+    const across=Math.max(-v,Math.min(v,-sin*x*mirror+cos*y));
+    return {x:mirror*(cos*along-sin*across),y:sin*along+cos*across};
+  }
+  const x=Number.isFinite(settings.x)?settings.x:.5;
+  const y=Number.isFinite(settings.y)?settings.y:.5;
+  const offset=constrain((1-2*x)*maxX,(1-2*y)*maxY);
+  return {scale,cos,sin,offset,maxX,maxY,constrain};
+}
+
+function setPhotoOffset(geometry,settings,x,y) {
+  const position=geometry.constrain(x,y);
+  if(geometry.maxX>1e-6)settings.x=(1-position.x/geometry.maxX)/2;
+  if(geometry.maxY>1e-6)settings.y=(1-position.y/geometry.maxY)/2;
+}
+
+function renderPhotoLayer(canvas, width, height, image, settings, allowDownsample) {
+  const {flipPhoto}=settings;
+  const clamp=(value,min,max,fallback)=>Number.isFinite(value)?Math.min(max,Math.max(min,value)):fallback;
+  const blur=clamp(settings.blur,0,20,0)*canvas.width/width;
+  const divisor=allowDownsample && blur>=4?2:1;
+  const layer=document.createElement('canvas');
+  layer.width=Math.round(canvas.width/divisor);
+  layer.height=Math.round(canvas.height/divisor);
+  const context=layer.getContext('2d',{willReadFrequently:true});
+  const {scale,cos,sin,offset}=photoGeometry(width,height,image.naturalWidth,image.naturalHeight,settings);
+  context.save();
+  context.scale(layer.width/width,layer.height/height);
+  context.translate(width/2+offset.x,height/2+offset.y);
+  if(flipPhoto)context.scale(-1,1);
+  context.transform(cos,sin,-sin,cos,0,0);
+  const w=image.naturalWidth*scale, h=image.naturalHeight*scale;
+  context.drawImage(image,-w/2,-h/2,w,h);
+  context.restore();
+
+  const contrast=clamp(settings.contrast,50,150,100)/100;
+  const light=1-(settings.dimOn===false?0:clamp(settings.darken,0,100,0))/100;
+  const brighten=clamp(settings.brightness,-100,100,0)*.95;
+  const saturation=1+clamp(settings.saturation,-100,100,0)/100;
+  const warm=clamp(settings.warmth,-100,100,0)*.48;
+  const highlights=clamp(settings.highlights,-100,100,0)*.9;
+  const shadows=clamp(settings.shadows,-100,100,0)*.9;
+  const grade=brighten||warm||highlights||shadows||contrast!==1||light!==1||saturation!==1;
+  if(blur||grade) {
+    const pixels=context.getImageData(0,0,layer.width,layer.height), bytes=pixels.data;
+    if(blur)blurPhotoPixels(bytes,layer.width,layer.height,Math.max(1,Math.round(blur/divisor)));
+    if(grade)for(let i=0;i<bytes.length;i+=4) {
+      const r=bytes[i],g=bytes[i+1],b=bytes[i+2];
+      const gray=.2126*r+.7152*g+.0722*b, level=gray/255;
+      const tone=brighten+highlights*level**2+shadows*(1-level)**2;
+      bytes[i]=Math.max(0,Math.min(255,(gray+(r-gray)*saturation+warm-127.5)*contrast+127.5+tone))*light;
+      bytes[i+1]=Math.max(0,Math.min(255,(gray+(g-gray)*saturation-127.5)*contrast+127.5+tone))*light;
+      bytes[i+2]=Math.max(0,Math.min(255,(gray+(b-gray)*saturation-warm-127.5)*contrast+127.5+tone))*light;
+    }
+    context.putImageData(pixels,0,0);
+  }
+  canvas.getContext('2d').drawImage(layer,0,0,canvas.width,canvas.height);
+  layer.width=layer.height=1;
+}
+
+function blurPhotoPixels(bytes,width,height,radius) {
+  // Premultiplied samples keep transparent PNG edges independent of the theme.
+  for(let i=0;i<bytes.length;i+=4) {
+    const a=bytes[i+3]/255;
+    if(a!==1)for(let c=0;c<3;c++)bytes[i+c]*=a;
+  }
+  const scratch=new Uint8ClampedArray(bytes.length);
+  function pass(source,output,vertical) {
+    const length=vertical?height:width, lines=vertical?width:height, stride=vertical?width*4:4;
+    const divisor=radius*2+1;
+    for(let line=0;line<lines;line++) {
+      const start=vertical?line*4:line*width*4;
+      for(let channel=0;channel<4;channel++) {
+        const base=start+channel;
+        let sum=source[base]*(radius+1);
+        for(let i=1;i<=radius;i++)sum+=source[base+Math.min(i,length-1)*stride];
+        for(let i=0;i<length;i++) {
+          output[base+i*stride]=sum/divisor;
+          sum+=source[base+Math.min(length-1,i+radius+1)*stride]-source[base+Math.max(0,i-radius)*stride];
+        }
+      }
+    }
+  }
+  for(let iteration=0;iteration<2;iteration++){pass(bytes,scratch,false);pass(scratch,bytes,true);}
+  for(let i=0;i<bytes.length;i+=4) {
+    const a=bytes[i+3]/255;
+    if(a&&a!==1)for(let c=0;c<3;c++)bytes[i+c]/=a;
+  }
+}
+
+function bindPhotoGestures(target, getSlide, changed, isEnabled=()=>true) {
+  const pointers=new Map();
+  let start;
+  const limit=(value,min,max)=>Math.max(min,Math.min(max,value));
+  function gesture() {
+    const [a,b]=pointers.values();
+    return b?{x:(a.x+b.x)/2,y:(a.y+b.y)/2,distance:Math.max(1,Math.hypot(a.x-b.x,a.y-b.y))}
+      :{...a,distance:1};
+  }
+  function reset() {
+    if (!pointers.size) {start=null;return;}
+    const slide=getSlide();
+    const rect=target.getBoundingClientRect();
+    const point=gesture();
+    const {scale,offset}=photoGeometry(rect.width,rect.height,slide.photoWidth,slide.photoHeight,slide);
+    start={slide,rect,scale,zoom:slide.zoom,distance:point.distance,
+      x:(point.x-rect.left-rect.width/2-offset.x)/scale,
+      y:(point.y-rect.top-rect.height/2-offset.y)/scale};
+  }
+  const point=e=>({x:e.clientX,y:e.clientY});
+  target.onpointerdown=e=>{
+    const {photoWidth,photoHeight}=getSlide();
+    if (!isEnabled() || !photoWidth || !photoHeight || pointers.size>=2 || e.button!==0) return;
+    pointers.set(e.pointerId,point(e));
+    target.setPointerCapture(e.pointerId);
+    reset();
+  };
+  target.onpointermove=e=>{
+    if (!isEnabled() || !pointers.has(e.pointerId) || !start || start.slide!==getSlide()) return;
+    pointers.set(e.pointerId,point(e));
+    const next=gesture(), {slide,rect}=start;
+    slide.zoom=limit(start.zoom*next.distance/start.distance,1,3);
+    const geometry=photoGeometry(rect.width,rect.height,slide.photoWidth,slide.photoHeight,slide);
+    setPhotoOffset(geometry,slide,next.x-rect.left-rect.width/2-start.x*geometry.scale,
+      next.y-rect.top-rect.height/2-start.y*geometry.scale);
+    changed();
+  };
+  target.onpointerup=target.onpointercancel=target.onlostpointercapture=e=>{
+    if (pointers.delete(e.pointerId)) reset();
+  };
+  return ()=>{
+    for (const id of pointers.keys()) if (target.hasPointerCapture(id)) target.releasePointerCapture(id);
+    pointers.clear();start=null;
+  };
+}
+
+function bindPhotoSteppers() {
+  const rows=[...document.querySelectorAll('[data-photo-step]')].map(input=>{
+    const row=input.parentElement, label=row.firstElementChild.textContent;
+    const controls=document.createElement('div'), value=document.createElement('output');
+    controls.className='photoStepper';
+    controls.setAttribute('role','group');
+    controls.setAttribute('aria-label',label);
+    value.setAttribute('aria-live','off');
+    const wrap=input.dataset.photoStep==='degrees';
+    function makeButton(symbol,direction) {
+      const button=document.createElement('button');
+      button.type='button';
+      button.textContent=symbol;
+      button.setAttribute('aria-label',(direction<0?'Уменьшить: ':'Увеличить: ')+label);
+      let delay,repeat,held=false;
+      function stop() {clearTimeout(delay);clearInterval(repeat);}
+      function step() {
+        if(button.disabled || input.matches(':disabled')){stop();return;}
+        const next=Number(input.value)+Number(input.step)*direction;
+        input.value=wrap?photoAngle(next):Math.max(Number(input.min),Math.min(Number(input.max),Number(next.toFixed(5))));
+        input.dispatchEvent(new Event('input',{bubbles:true}));
+      }
+      button.onpointerdown=event=>{
+        if(event.button!==0) return;
+        held=false;stop();
+        button.setPointerCapture(event.pointerId);
+        delay=setTimeout(()=>{held=true;repeat=setInterval(step,75);step();},380);
+      };
+      button.onpointerup=button.onpointercancel=button.onlostpointercapture=stop;
+      button.onclick=event=>{
+        if(!held || !event.detail)step();
+        held=false;
+      };
+      return button;
+    }
+    const minus=makeButton('−',-1), plus=makeButton('+',1);
+    controls.append(minus,value,plus);row.append(controls);
+    return {input,value,minus,plus,wrap};
+  });
+  return ()=>{
+    for(const {input,value,minus,plus,wrap} of rows){
+      const current=Number(input.value);
+      const disabled=input.matches(':disabled');
+      const type=input.dataset.photoStep;
+      const shown=type==='scale'?Math.round(current*100):Math.round(current);
+      const suffix=wrap?'°':type==='scale'||type==='percent'?'%':'';
+      value.textContent=shown+suffix;
+      minus.disabled=disabled || (!wrap && current<=Number(input.min));
+      plus.disabled=disabled || (!wrap && current>=Number(input.max));
+    }
+  };
+}
+
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
@@ -1235,6 +1398,7 @@ const SMFiles = (() => {
   let ready=false,storageAvailable=true;
   const modeButtons = all('[data-mode]'),tabButtons=all('[data-tab]');
   const controls=all('[data-slide],[data-project]');
+  const syncPhotoSteppers=bindPhotoSteppers();
   function button(label,action) {
     const el=document.createElement('button');
     const caption=document.createElement('span');
@@ -1315,7 +1479,7 @@ const SMFiles = (() => {
     for(const el of controls){
       const value=el.dataset.slide?s[el.dataset.slide]:p[el.dataset.project];
       if(el.type==='checkbox')el.checked=Boolean(value);
-      else if(el.value!==String(value))el.value=String(value);
+      else if(el.value!==String(value ?? el.dataset.default ?? ''))el.value=String(value ?? el.dataset.default ?? '');
     }
     for(const b of modeButtons)b.setAttribute('aria-pressed',state.mode===b.dataset.mode);
     for(const b of tabButtons){const active=tab===b.dataset.tab;b.setAttribute('aria-selected',active);$(b.dataset.tab).hidden=!active;}
@@ -1340,8 +1504,9 @@ const SMFiles = (() => {
     const strength=$('dimLevel').querySelector('input');
     strength.disabled=!dimOn;
     strength.value=dimOn?s.darken:(s.lastDarken??(s.darken||28));
-    $('dimValue').textContent=strength.value+'%';
-    frame.classList.toggle('pan',tab==='photo' && !!s.photo && s.photoOn);
+    $('flipPhoto').setAttribute('aria-pressed',!!s.flipPhoto);
+    syncPhotoSteppers();
+    if(!frame.classList.toggle('pan',tab==='photo' && !!s.photo && s.photoOn))cancelCrop();
     resize();
   }
   for(const [pos,title] of Object.entries(positions))for(const [align,desc] of Object.entries(alignment)){
@@ -1368,7 +1533,7 @@ const SMFiles = (() => {
     for(const [value,name] of [['auto','Авто'],['light','Светлый'],['dark','Тёмный']])el.add(new Option(name,value));
   }
   for(const el of controls)el.addEventListener('input',()=>{
-    const value=el.type==='checkbox'?el.checked:el.type==='range'?Number(el.value):el.hasAttribute('data-bool')?el.value==='true':el.value;
+    const value=el.type==='checkbox'?el.checked:el.type==='number'?Number(el.value):el.hasAttribute('data-bool')?el.value==='true':el.value;
     const key=el.dataset.slide||el.dataset.project;
     const before=SMRender.logoChoice(project(),slide());
     (el.dataset.slide?slide():project())[key]=value;changed();
@@ -1420,6 +1585,10 @@ const SMFiles = (() => {
     else s.lastDarken=s.darken;
     changed();
   };
+  $('rotatePhoto').onclick=()=>{const s=slide();s.rotation=photoAngle((s.rotation||0)+90);changed();};
+  $('flipPhoto').onclick=()=>{
+    const s=slide();s.flipPhoto=!s.flipPhoto;s.x=1-(s.x??.5);changed();
+  };
   $('upload').onchange=async e=>{
     const file=e.target.files[0],s=slide();e.target.value='';if(!file)return;
     $('photoError').hidden=true;
@@ -1431,7 +1600,7 @@ const SMFiles = (() => {
         const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));
         c.getContext('2d').drawImage(img,0,0,c.width,c.height);
         const photo=c.toDataURL(file.type==='image/png'?'image/png':'image/jpeg',.94);
-        Object.assign(s,{photo,photoWidth:c.width,photoHeight:c.height,photoOn:true,x:.5,y:.5,zoom:1});changed();
+        Object.assign(s,{photo,photoWidth:c.width,photoHeight:c.height,photoOn:true,x:.5,y:.5,zoom:1,rotation:0,flipPhoto:false});changed();
       } finally {URL.revokeObjectURL(url);}
     } catch {
       const message='Фото не открылось. Выберите изображение в формате JPEG или PNG.';
@@ -1439,23 +1608,7 @@ const SMFiles = (() => {
       else showError(message);
     }
   };
-  let drag=null;
-  frame.onpointerdown=e=>{
-    if(!frame.classList.contains('pan'))return;
-    const s=slide();
-    if(!s.photoWidth || !s.photoHeight)return;
-    const ratio=Math.max(frame.clientWidth/s.photoWidth,frame.clientHeight/s.photoHeight)*s.zoom;
-    drag={id:e.pointerId,x:e.clientX,y:e.clientY,s,initialX:s.x,initialY:s.y,
-      dx:s.photoWidth*ratio-frame.clientWidth,dy:s.photoHeight*ratio-frame.clientHeight};
-    frame.setPointerCapture(e.pointerId);
-  };
-  frame.onpointermove=e=>{
-    if(!drag||drag.id!==e.pointerId)return;
-    if(drag.dx>1)drag.s.x=Math.max(0,Math.min(1,drag.initialX-(e.clientX-drag.x)/drag.dx));
-    if(drag.dy>1)drag.s.y=Math.max(0,Math.min(1,drag.initialY-(e.clientY-drag.y)/drag.dy));
-    changed();
-  };
-  frame.onlostpointercapture=()=>{drag=null;};
+  const cancelCrop=bindPhotoGestures(frame,slide,changed,()=>frame.classList.contains('pan'));
   function editPreview(){
     if(photoSheet.open)return;
     if(tab==='photo' && slide().photoOn && slide().photo)return;
