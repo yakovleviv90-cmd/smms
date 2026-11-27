@@ -15,12 +15,12 @@
 *{box-sizing:border-box}body{margin:0}button,select,input,textarea{font:inherit;color:inherit}button,select,.fileButton{cursor:pointer}button{border:0;background:none}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,.fileButton:focus-within{outline:3px solid var(--focus);outline-offset:2px}
 header{height:72px;padding:0 max(24px,calc((100vw - 1320px)/2));display:flex;gap:18px;align-items:center;border-bottom:1px solid var(--line);background:var(--panel)}#saveState{font-size:12px;color:var(--muted);margin-left:auto}.primary,.fileButton{background:var(--accent);color:var(--on-accent);border-radius:24px;font-weight:600;padding:12px 22px;min-height:44px}.primary:disabled,button:disabled{opacity:.5;cursor:default}
 main{max-width:1368px;margin:auto;padding:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,390px);align-items:start;gap:24px}.studio{min-width:0;background:var(--container);border-radius:16px;padding:16px 18px 8px}.seg,.tools{display:flex;gap:2px}.seg{margin:0 0 16px;width:100%;padding:3px;background:var(--container-high);border-radius:10px}.seg button{flex:1;min-width:0;padding:8px;min-height:44px;font-weight:550;font-size:14px;border-radius:8px}.seg button[aria-pressed=true]{background:var(--panel);box-shadow:0 1px 3px #00000018}
-#stage{display:grid;place-items:center;height:clamp(387px,calc(100svh - 222px),862px);padding:14px 0;overflow:hidden}#frame{display:block;background:var(--ink);max-width:100%;max-height:100%}#frame.pan{touch-action:none;cursor:grab}.caption,.slides,#slides{display:flex;align-items:center;gap:8px}.caption{justify-content:space-between;border-top:1px solid var(--line);color:var(--muted);font-size:12px;min-height:42px}.guide{display:flex;align-items:center;gap:5px;min-height:40px}.guide input{accent-color:var(--accent)}.slides{border-top:1px solid var(--line);padding:8px 0;flex-wrap:wrap}#slides{max-width:100%;overflow-x:auto}#slides button,#addSlide{min-height:40px;min-width:40px;border-radius:7px;background:var(--panel);white-space:nowrap}#slides button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}#addSlide{padding:4px 12px}
+#stage{display:grid;place-items:center;height:clamp(429px,calc(100svh - 180px),904px);padding:14px 0;overflow:hidden}#frame{display:block;background:var(--ink);max-width:100%;max-height:100%}#frame.pan{touch-action:none;cursor:grab}.slides,#slides{display:flex;align-items:center;gap:8px}.slides{border-top:1px solid var(--line);padding:8px 0;flex-wrap:wrap}#slides{max-width:100%;overflow-x:auto}#slides button,#addSlide{min-height:40px;min-width:40px;border-radius:7px;background:var(--panel);white-space:nowrap}#slides button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}#addSlide{padding:4px 12px}
 .inspector{background:var(--panel);border:1px solid var(--line);border-radius:20px;min-width:0;overflow:hidden}.tools{border-bottom:1px solid var(--line);padding:0 10px}.tools button{position:relative;flex:1;min-height:50px;color:var(--muted);font-size:14px}.tools button[aria-selected=true]{color:var(--accent);font-weight:690}.tools button[aria-selected=true]:after{content:'';position:absolute;bottom:0;height:3px;left:12px;right:12px;background:var(--accent);border-radius:3px}.panel{padding:22px}h1,h2{margin:0 0 20px;font-size:25px;line-height:1.15;letter-spacing:-.035em}#layouts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}.layout{display:flex;align-items:center;gap:9px;padding:8px;border:1px solid var(--line);border-radius:9px;text-align:left;font-size:13px;font-weight:550}.layout[aria-pressed=true],.swatch[aria-pressed=true],#logos button[aria-pressed=true]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--container)}
 .row,.slider{padding:10px 0;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:50px;font-size:14px}select{max-width:58%;background:var(--container);padding:7px 5px;border:0;border-radius:6px}input[role=switch]{appearance:none;width:43px;height:26px;flex:none;border-radius:20px;margin:0;background:var(--outline);position:relative;cursor:pointer}input[role=switch]:checked{background:var(--accent)}input[role=switch]:before{content:'';position:absolute;background:var(--panel);border-radius:50%;width:20px;height:20px;top:3px;left:3px}input[role=switch]:checked:before{left:20px}
 .field{display:block;font-size:13px;font-weight:600;margin-bottom:12px}.field input,.field textarea{width:100%;display:block;border:1px solid var(--outline);background:var(--panel);border-radius:8px;padding:10px;margin-top:7px;font-size:16px;font-weight:400;resize:vertical}.fileButton{display:block;text-align:center;margin:8px 0 16px;position:relative}.fileButton input{width:100%;height:100%;position:absolute;inset:0;opacity:0;cursor:pointer}fieldset{border:0;padding:0;margin:0}.slider input{width:52%;accent-color:var(--accent)}fieldset:disabled{opacity:.5}#themes,#logos{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 18px}.swatch,#logos button{border:1px solid var(--line);border-radius:7px;min-height:44px;padding:6px 8px;font-size:12px}.swatch i{display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid #0002;vertical-align:middle;margin-right:4px}#logos button{flex:1;min-width:54px}
 #warning{position:sticky;bottom:0;padding:12px max(18px,calc((100vw - 900px)/2));background:#ffe8c8;color:#583512;font-size:14px}#warning button{text-decoration:underline;font-weight:600}dialog{border:1px solid var(--line);border-radius:16px;width:min(390px,92vw);padding:22px;background:var(--panel)}dialog::backdrop{background:#20211f66}dialog form{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}dialog h2{margin:0}dialog form button{font-size:24px;min-width:44px;height:44px}dialog>.fileButton{width:100%;margin:7px 0}#exportStatus{margin:12px 0 0}#exportStatus:empty{display:none}.sr{position:absolute;overflow:hidden;clip-path:inset(100%);width:1px;height:1px}[hidden]{display:none!important}
-@media(max-width:760px){header{height:calc(54px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 14px 0;gap:8px}.primary{padding:7px 14px;min-height:38px}main{display:flex;flex-direction:column;padding:0 0 env(safe-area-inset-bottom);gap:0}.studio,.inspector{width:100%;border-radius:0}.studio{padding:10px 14px 0}#stage{height:clamp(272px,calc(46svh + 42px),532px);padding:10px 0}.caption{min-height:32px}.guide{min-height:32px}.inspector{border:0;border-top:1px solid var(--line)}.panel{padding:16px}.tools button{min-height:45px}h1{font-size:21px;margin-bottom:14px}#layouts{grid-template-columns:repeat(3,1fr);gap:6px}.layout{flex-direction:column;gap:5px;justify-content:center;padding:6px 2px;font-size:11px}.row select{font-size:16px}.tools{position:sticky;top:0;background:var(--panel);z-index:1}}
+@media(max-width:760px){header{height:calc(54px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 14px 0;gap:8px}.primary{padding:7px 14px;min-height:38px}main{display:flex;flex-direction:column;padding:0 0 env(safe-area-inset-bottom);gap:0}.studio,.inspector{width:100%;border-radius:0}.studio{padding:10px 14px 0}#stage{height:clamp(305px,calc(46svh + 75px),565px);padding:10px 0}.inspector{border:0;border-top:1px solid var(--line)}.panel{padding:16px}.tools button{min-height:45px}h1{font-size:21px;margin-bottom:14px}#layouts{grid-template-columns:repeat(3,1fr);gap:6px}.layout{flex-direction:column;gap:5px;justify-content:center;padding:6px 2px;font-size:11px}.row select{font-size:16px}.tools{position:sticky;top:0;background:var(--panel);z-index:1}}
 @media(max-width:760px){#layouts{grid-template-columns:1fr 1fr}.layout{flex-direction:row;justify-content:flex-start;padding:8px;min-height:52px;font-size:12px}}
 #contrastHelp{margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.45}
 
@@ -95,9 +95,9 @@ main {width:100%;flex:1;min-height:0;margin:0 auto;grid-template-rows:minmax(0,1
 #photoError {font-size:14px;color:#843528;}
 @media(max-width:760px) and (orientation:portrait) {
   .studio {flex:none;}
-  #stage {height:clamp(202px,min(calc(46svh + 42px),calc(100svh - 323px)),532px);}
+  #stage {height:clamp(235px,min(calc(46svh + 75px),calc(100svh - 290px)),565px);}
   .inspector {flex:1;}
-  main:has(#photoSheet[open]) :is(.caption,.slides,.tools) {display:none;}
+  main:has(#photoSheet[open]) :is(.slides,.tools) {display:none;}
   main:has(#photoSheet[open]) .inspector {border-radius:18px 18px 0 0;}
   .photoMenu {padding:12px 16px;}
   .photoDrawer {padding:0 16px;}
@@ -152,8 +152,8 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
 input[role=switch] {width:36px;height:22px;}
 input[role=switch]:before {width:16px;height:16px;}
 input[role=switch]:checked:before {left:17px;}
-.guide {position:relative;gap:6px;}
-.guide:before {content:'';position:absolute;inset:-5px 0;}
+
+
 .primary,.fileButton,#slides button,#addSlide,#removeSlide,.deleteActions button {border-radius:var(--control-radius);min-height:var(--control-height);}
 #slides button {min-width:var(--control-height);}
 .slides {gap:4px;padding:4px 0;}
@@ -170,6 +170,14 @@ input[role=switch]:checked:before {left:17px;}
 #resetSheet p {font-size:14px;line-height:1.45;}
 #resetSheet .deleteActions {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
 #resetSheet .deleteActions button {min-width:0;padding:0 6px;}
+
+.brandInfo {display:grid;justify-items:start;align-content:center;min-width:min-content;}
+.canvasSize {color:var(--muted);font-size:11px;line-height:13px;font-variant-numeric:tabular-nums;}
+.canvasSize #size {white-space:nowrap;}
+#saveState {flex:1 1 0;text-align:right;}
+@media(max-width:390px) {
+  .canvasSize {font-size:10px;line-height:10.5px;}
+}
 </style><link rel="manifest" data-app-manifest>
 <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png?v=silver">
 <link rel="icon" href="./icon-192.png?v=silver">
@@ -177,16 +185,15 @@ input[role=switch]:checked:before {left:17px;}
 <meta name="apple-mobile-web-app-title" content="СММ Знака">
 <meta name="robots" content="noindex,nofollow"></head>
 <body>
-<header><div class="name" role="img" aria-label="Знак"><svg width="82" height="31" viewBox="0 0 82 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+<header><div class="brandInfo"><div class="name" role="img" aria-label="Знак"><svg width="82" height="31" viewBox="0 0 82 31" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M23.9212 2.64525C27.9706 5.40481 30.616 10.0422 30.616 15.3C30.616 23.7583 23.7579 30.6 15.2998 30.6C13.9935 30.6 12.7199 30.4368 11.4952 30.1266L26.7134 13.2589L24.607 10.3197L13.471 15.1857L23.9212 2.64525ZM0 15.3163C0 6.85805 6.85795 0 15.2998 0C16.7367 0 18.1246 0.195945 19.4472 0.571506L6.12317 8.57256L8.01728 11.7403L15.0385 7.52754L5.64964 18.7943L7.80501 21.6682L18.2716 17.1288L7.854 28.6733C3.16773 26.0606 0 21.0477 0 15.3163Z" fill="black"/>
 <path d="M42.4309 20.9519C41.6195 20.9519 40.8969 20.8125 40.263 20.5336C39.6328 20.251 39.1347 19.8635 38.7689 19.3709C38.4067 18.8746 38.2201 18.3023 38.2093 17.654H40.5782C40.5926 17.9256 40.6814 18.1647 40.8444 18.3711C41.011 18.574 41.232 18.7316 41.5072 18.8438C41.7825 18.9561 42.0922 19.0123 42.4363 19.0123C42.7949 19.0123 43.1119 18.9489 43.3871 18.8221C43.6624 18.6953 43.8779 18.5197 44.0337 18.2951C44.1895 18.0705 44.2673 17.8115 44.2673 17.5181C44.2673 17.2211 44.184 16.9585 44.0174 16.7303C43.8544 16.4985 43.619 16.3174 43.3111 16.187C43.0068 16.0566 42.6446 15.9914 42.2244 15.9914H41.1867V14.2636H42.2244C42.5794 14.2636 42.8927 14.202 43.1644 14.0789C43.4397 13.9557 43.6534 13.7855 43.8055 13.5682C43.9576 13.3472 44.0337 13.09 44.0337 12.7966C44.0337 12.5177 43.9667 12.2732 43.8327 12.0632C43.7023 11.8494 43.5175 11.6828 43.2785 11.5633C43.043 11.4438 42.7678 11.384 42.4526 11.384C42.1339 11.384 41.8423 11.442 41.5779 11.5579C41.3135 11.6702 41.1016 11.8313 40.9422 12.0414C40.7828 12.2515 40.6977 12.4978 40.6868 12.7803H38.432C38.4429 12.1392 38.6258 11.5742 38.9808 11.0852C39.3358 10.5962 39.8139 10.214 40.4152 9.93876C41.0201 9.65985 41.7028 9.5204 42.4635 9.5204C43.2314 9.5204 43.9033 9.65985 44.4792 9.93876C45.0551 10.2177 45.5025 10.5944 45.8212 11.0689C46.1436 11.5398 46.303 12.0686 46.2994 12.6554C46.303 13.2784 46.1092 13.7982 45.718 14.2147C45.3304 14.6313 44.8251 14.8957 44.2021 15.008V15.0949C45.0207 15.1999 45.6438 15.4843 46.0712 15.9479C46.5022 16.4079 46.7159 16.9839 46.7123 17.6757C46.7159 18.3096 46.533 18.8728 46.1635 19.3654C45.7977 19.858 45.2924 20.2456 44.6477 20.5281C44.0029 20.8107 43.264 20.9519 42.4309 20.9519ZM48.4686 20.7998V9.67253H50.8212V14.2636H55.597V9.67253H57.9442V20.7998H55.597V16.2033H50.8212V20.7998H48.4686ZM61.8017 20.7998H59.2807L63.122 9.67253H66.1538L69.9896 20.7998H67.4686L64.6814 12.2153H64.5944L61.8017 20.7998ZM61.6442 16.426H67.599V18.2625H61.6442V16.426ZM78.0607 20.7998L74.4856 16.0566H73.6815V20.7998H71.3289V9.67253H73.6815V14.1169H74.1542L77.8488 9.67253H80.7773L76.4362 14.8341L80.9784 20.7998H78.0607Z" fill="black"/>
 </svg>
-</div><span id="saveState" role="status"></span>
+</div><small class="canvasSize">Размер холста: <span id="size"></span></small></div><span id="saveState" role="status"></span>
 <div class="headerActions"><button id="clearEditor" disabled>Очистить</button><button id="export" class="primary" aria-label="Экспорт" title="Экспорт"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 15V3m-5 5 5-5 5 5M4 15v5h16v-5"/></svg></button></div></header>
 <main>
 <section class="studio" aria-label="Предпросмотр">
   <div id="stage"><canvas id="frame" width="1080" height="1920" role="button" tabindex="0" aria-label="Редактировать текст в кадре"></canvas></div>
-  <div class="caption"><span id="size"></span><span id="offlineStatus" role="status">Готовим офлайн-копию…</span><label class="guide">Поля<input type="checkbox" role="switch" id="guides"></label></div>
   <div class="slides" id="slideBar" hidden><div id="slides"></div><button id="addSlide">+ Добавить слайд</button><button id="removeSlide">Удалить слайд</button></div>
 </section>
 <section class="inspector" aria-label="Настройки слайда">
@@ -194,6 +201,7 @@ input[role=switch]:checked:before {left:17px;}
   <div id="layout" class="panel">
     <nav class="seg" id="modes" aria-label="Формат публикации"><button data-mode="story">Сторис</button><button data-mode="post">Пост</button><button data-mode="carousel">Карусель</button></nav>
     <h1>Композиция</h1><div id="layouts"></div>
+    <label class="row">Поля<input type="checkbox" role="switch" id="guides"></label>
     <label class="row">Заголовок <select data-slide="role"><option>H1</option><option>H2</option></select></label>
     <label class="row" id="logoPosition">Расположение блоков <select data-slide="logoBottom" data-bool><option value="false">Рядом</option><option value="true">По краям</option></select></label>
     <label class="row" id="swapRow">Поменять местами текст и логотип<input type="checkbox" data-slide="swapBlocks" role="switch"></label>
@@ -1547,22 +1555,9 @@ const SMFiles = (() => {
   window.addEventListener('pageshow',applyOrientation);
   applyOrientation();
 })();
-</script><script>(() => {
-  const status = document.getElementById('offlineStatus');
-  const workers = navigator.serviceWorker;
-  const failed = () => {status.textContent = 'Офлайн-копия недоступна';};
-  if (!workers) {failed(); return;}
-  const update = () => {
-    if (workers.controller) status.textContent = 'Доступно офлайн';
-  };
-  workers.addEventListener('controllerchange', update);
-  workers.register('./sw.js', {updateViaCache: 'none'}).then(registration => {
-    const installing = registration.installing;
-    installing?.addEventListener('statechange', () => {
-      if (installing.state === 'redundant' && !workers.controller) failed();
-    });
-    update();
-    return workers.ready.then(update);
-  }).catch(failed);
-})();
+</script><script>if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('./sw.js', {updateViaCache: 'none'}).catch(() => {
+    console.warn('Не удалось подготовить офлайн-копию редактора.');
+  });
+}
 </script></body></html>
