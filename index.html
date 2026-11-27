@@ -121,8 +121,9 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
 .inspector h1,.photoDrawer h2 {font-size:18px;line-height:1.2;letter-spacing:-.025em;margin:0 0 8px;}
 .tools {padding:8px;gap:2px;}
 .tools button,.seg button {min-height:var(--control-height);border-radius:var(--control-radius);font-size:14px;}
-.seg {padding:2px;gap:2px;margin-bottom:10px;}
-.seg button {min-height:25px;padding:0 8px;line-height:20px;}
+.seg {padding:2px;gap:2px;margin-bottom:10px;background:transparent;}
+.tools button,.seg button {min-height:25px;padding:0 8px;line-height:20px;}
+.seg button:not([aria-pressed=true]) {background:var(--container);}
 .seg button[aria-pressed=true] {background:var(--accent);color:var(--on-accent);box-shadow:none;}
 #layouts,#themes,#logos {gap:4px;margin:0 0 8px;}
 .layout,#logos button,.swatch {min-height:var(--control-height);border-radius:var(--control-radius);}
@@ -135,7 +136,7 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
 .mini:before,.mini:after {content:'';height:2px;background:var(--muted);border-radius:1px;}
 .mini:before {width:14px;}
 .mini:after {width:8px;}
-.layout[aria-pressed=true],.swatch[aria-pressed=true],#logos button[aria-pressed=true] {color:var(--on-accent);background:var(--accent);box-shadow:none;}
+.layout[aria-pressed=true],.swatch[aria-pressed=true],#logos button[aria-pressed=true] {border-color:var(--outline);color:var(--on-accent);background:var(--accent);box-shadow:none;}
 .layout[aria-pressed=true] .mini {background:var(--container);}
 .layout[aria-pressed=true] .mini:before,.layout[aria-pressed=true] .mini:after {background:var(--ink);}
 .swatch {gap:2px;padding:3px;}
@@ -149,9 +150,10 @@ html:has(#rotationNotice[open]) {overflow:hidden;}
 .row select {border-radius:var(--control-radius);padding:4px;min-height:32px;}
 .field {margin-bottom:6px;}
 .field input,.field textarea {padding:6px 8px;margin-top:3px;border-radius:var(--control-radius);}
-input[role=switch] {width:36px;height:22px;}
-input[role=switch]:before {width:16px;height:16px;}
-input[role=switch]:checked:before {left:17px;}
+input[role=switch] {width:36px;height:22px;border:1px solid var(--line);box-shadow:none;}
+input[role=switch]:checked {border-color:var(--outline);}
+input[role=switch]:before {width:16px;height:16px;top:2px;left:2px;}
+input[role=switch]:checked:before {left:16px;}
 
 
 .primary,.fileButton,#slides button,#addSlide,#removeSlide,.deleteActions button {border-radius:var(--control-radius);min-height:var(--control-height);}
